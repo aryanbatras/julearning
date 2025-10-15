@@ -1,0 +1,13 @@
+## Pages
+- [- JU Learning Portal](/coursedetails): No description available
+- [About Us - JU Learning Portal](/about): Learn more about the JU Learning Portal mission, vision, and team.
+- [Admin Dashboard - JU Learning Portal](/admindashboard): Manage courses, coupons, payments, team, and gallery
+- [All Courses - JU Learning Portal](/courses): Browse all available courses at JU Learning Portal
+- [Contact Us - JU Learning Portal](/contact): Get in touch with the JU Learning Portal team.
+- [Gallery - JU Learning Portal](/gallery): A gallery of moments and events at JU Learning Portal.
+- [Login - JU Learning Portal](/login): Login to access your JU Learning Portal account
+- [My Courses - JU Learning Portal](/mycourses): Access your enrolled courses
+- [Our Team - JU Learning Portal](/team): Meet the team behind the JU Learning Portal.
+- [Privacy Policy - JU Learning Portal](/privacypolicy): Read the privacy policy for the JU Learning Portal.
+- [Sign Up - JU Learning Portal](/signup): No description available
+- [Student Dashboard - JU Learning Portal](/studentdashboard): Your personal dashboard for courses and learning materials.
