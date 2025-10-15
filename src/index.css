@@ -28,7 +28,158 @@
   border-radius: 20px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* Custom scrollbar for webkit browsers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Custom animations for Footer */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(147, 51, 234, 0.3), 0 0 60px rgba(236, 72, 153, 0.2);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 50px rgba(147, 51, 234, 0.6), 0 0 80px rgba(236, 72, 153, 0.4);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Hero Section Styles */
+@keyframes spin_4991 {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  20% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  40% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  80% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+}
+
+.animated-hero-card {
+  --bg-color: #ffffff;
+  background-color: var(--bg-color);
+  padding: 2rem 3rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.animated-hero-loader {
+  color: rgb(55, 65, 81);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  min-height: 50px;
+  padding: 15px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.animated-hero-words {
+  overflow: hidden;
+  position: relative;
+  margin-left: 12px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.animated-hero-words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 15%,
+    transparent 35%,
+    transparent 65%,
+    var(--bg-color) 85%
+  );
+  z-index: 20;
+  border-radius: 8px;
+}
+
+.animated-hero-word {
+  display: block;
+  height: 40px;
+  padding-left: 8px;
+  color: #7c3aed;
+  font-weight: 700;
+  animation: spin_4991 4s infinite;
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  line-height: 40px;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+/* Hero section background pattern */
+.hero-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
 
 @layer base {
   :root {
@@ -88,6 +239,25 @@ body {
   @apply text-gray-900;
 }
 
-.prose ul > li::before {
-  @apply bg-primary;
+/* Neumorphic button styles */
+.neumorphic-btn {
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.neumorphic-btn:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+
+.neumorphic-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
