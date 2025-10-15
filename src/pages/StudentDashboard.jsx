@@ -301,16 +301,16 @@ const StudentDashboard = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
               Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">{user?.user_metadata?.name?.split(' ')[0] || 'Student'}</span>! 👋
             </h1>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">Your personalized learning dashboard is ready. Let's make today productive!</p>
+            <p className="text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in-up">Your personalized learning dashboard is ready. Let's make today productive!</p>
 
-            <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" />
+            <div className="relative max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 transition-colors duration-300" />
               <input
                 type="text"
                 placeholder="Search courses, topics, or resources..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-14 pr-6 py-5 text-lg border-0 rounded-2xl bg-white shadow-lg focus:ring-2 focus:ring-blue-500/50 focus:outline-none transition-all duration-300"
+                className="w-full pl-14 pr-6 py-5 text-lg border-0 rounded-2xl bg-white shadow-lg focus:ring-2 focus:ring-blue-500/50 focus:outline-none transition-all duration-300 hover:shadow-xl focus:scale-[1.02]"
               />
             </div>
           </motion.div>
@@ -332,30 +332,29 @@ const StudentDashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <StatCard
-              icon={BookOpen}
-              value={enrolledCourses.size}
-              label="Enrolled Courses"
-              color="bg-gradient-to-br from-blue-500 to-blue-600"
-            />
-            <StatCard
-              icon={Award}
-              value="12"
-              label="Certificates Earned"
-              color="bg-gradient-to-br from-green-500 to-green-600"
-            />
-            <StatCard
-              icon={Clock}
-              value="24h"
-              label="Learning Streak"
-              color="bg-gradient-to-br from-purple-500 to-purple-600"
-            />
-            <StatCard
-              icon={BarChart2}
-              value="85%"
-              label="Course Completion"
-              color="bg-gradient-to-br from-amber-500 to-orange-500"
-            />
+            {[
+              { icon: BookOpen, value: enrolledCourses.size, label: "Enrolled Courses", color: "bg-gradient-to-br from-blue-500 to-blue-600" },
+              { icon: Award, value: "12", label: "Certificates Earned", color: "bg-gradient-to-br from-green-500 to-green-600" },
+              { icon: Clock, value: "24h", label: "Learning Streak", color: "bg-gradient-to-br from-purple-500 to-purple-600" },
+              { icon: BarChart2, value: "85%", label: "Course Completion", color: "bg-gradient-to-br from-amber-500 to-orange-500" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="transform-gpu"
+              >
+                <StatCard
+                  icon={stat.icon}
+                  value={stat.value}
+                  label={stat.label}
+                  color={stat.color}
+                />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
@@ -413,38 +412,65 @@ const StudentDashboard = () => {
           <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <BookOpen className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
-              <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
-              <Link to="/courses" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-                Explore Courses →
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Award className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
-              <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your resume</p>
-              <Link to="/certifications" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-                Get Certified →
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
-              <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
-              <Link to="/study-groups" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
-                Join Groups →
-              </Link>
-            </div>
+            {[
+              {
+                icon: BookOpen,
+                title: "Academic Courses",
+                desc: "Comprehensive curriculum designed by expert faculty",
+                href: "/courses",
+                color: "from-blue-500 to-blue-600",
+                linkText: "Explore Courses →"
+              },
+              {
+                icon: Award,
+                title: "Certifications",
+                desc: "Industry-recognized certificates to boost your resume",
+                href: "/certifications",
+                color: "from-purple-500 to-purple-600",
+                linkText: "Get Certified →"
+              },
+              {
+                icon: Users,
+                title: "Study Groups",
+                desc: "Collaborate with peers and learn together",
+                href: "/study-groups",
+                color: "from-green-500 to-green-600",
+                linkText: "Join Groups →"
+              }
+            ].map((resource, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="group transform-gpu"
+              >
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${resource.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <resource.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
+                    {resource.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {resource.desc}
+                  </p>
+                  <Link
+                    to={resource.href}
+                    className={`font-semibold hover:opacity-80 transition-all duration-300 inline-flex items-center gap-2 ${
+                      resource.color.includes('blue') ? 'text-blue-600 hover:text-blue-700' :
+                      resource.color.includes('purple') ? 'text-purple-600 hover:text-purple-700' :
+                      'text-green-600 hover:text-green-700'
+                    }`}
+                  >
+                    <span>{resource.linkText}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
