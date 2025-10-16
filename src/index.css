@@ -178,15 +178,36 @@
 
 /* Ultra Smooth Website Performance & Animations */
 
-/* Smooth scrolling for the entire page */
+/* Override native smooth scroll for Lenis */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* GPU acceleration for all animations */
 * {
   transform-style: preserve-3d;
   backface-visibility: hidden;
+}
+
+/* Enhanced smooth scrolling optimizations */
+body {
+  /* Prevent momentum scrolling on iOS for consistent behavior */
+  -webkit-overflow-scrolling: auto;
+  /* Optimize for smooth scrolling performance */
+  will-change: scroll-position;
+  /* Improve scroll stability */
+  overscroll-behavior: none;
+}
+
+/* Optimize scrollable containers for ultra-smooth experience */
+.scroll-smooth {
+  scroll-behavior: auto;
+  /* Use transform3d for hardware acceleration */
+  transform: translateZ(0);
+  /* Optimize repaints */
+  contain: layout style paint;
+  /* Improve scroll performance */
+  will-change: scroll-position;
 }
 
 /* Ultra smooth transitions for all interactive elements */
@@ -485,7 +506,7 @@ body {
 }
 
 * {
-  @apply scroll-smooth;
+  @apply scroll-auto;
 }
 
 ::-webkit-scrollbar {
