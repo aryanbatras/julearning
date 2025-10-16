@@ -1,4 +1,3 @@
-// SignupPage.jsx
 import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -28,6 +27,12 @@ const SignupPage = () => {
     const [adminCode, setAdminCode] = useState('');
     const [imageFile, setImageFile] = useState(null);
     const [step, setStep] = useState(1);
+    const [adminDetails, setAdminDetails] = useState({
+        college: '',
+        bio: '',
+        message_for_juniors: '',
+        social_links: { instagram: '', linkedin: '', other: '' },
+    });
     const { signUp, loading } = useAuth();
     const navigate = useNavigate();
     const { toast } = useToast();
@@ -46,19 +51,6 @@ const SignupPage = () => {
         }));
     };
 
-    const handleImageUpload = async (userId) => {
-        if (!imageFile) return null;
-        const fileExt = imageFile.name.split('.').pop();
-        const fileName = `profile-${userId}-${Date.now()}.${fileExt}`;
-        const { error } = await supabase.storage.from('admin_profiles').upload(fileName, imageFile);
-        if (error) {
-            console.error("Image upload failed:", error);
-            return null;
-        }
-        const { data } = supabase.storage.from('admin_profiles').getPublicUrl(fileName);
-        return data?.publicUrl ?? null;
-    };
-
     const handleNextStep = async (e) => {
         e.preventDefault();
         if (role === 'admin' && adminCode !== 'MBSCET') {
@@ -74,29 +66,38 @@ const SignupPage = () => {
 
     const handleSubmit = async (e) => {
         if (e && e.preventDefault) e.preventDefault();
-        const { user, error } = await signUp(email.trim(), password.trim(), name.trim(), role);
 
-        if (error) {
-            toast({ title: "Signup failed", description: error.message || 'Please try again', variant: 'destructive' });
-            return;
-        }
+        if (role === 'admin') {
+            // For admin signup, pass admin details and image file to context
+            const { user, error } = await signUp(
+                email.trim(),
+                password.trim(),
+                name.trim(),
+                role,
+                adminDetails,
+                imageFile
+            );
 
-        if (user && role === 'admin') {
-            const imageUrl = await handleImageUpload(user.id);
-            const profileData = {
-                id: user.id,
-                ...adminDetails,
-                profile_image_url: imageUrl,
-            };
-            const { error: adminProfileError } = await supabase.from('admin_profiles').insert(profileData);
-            if (adminProfileError) {
-                console.error("Failed to save admin details:", adminProfileError);
-                // non-blocking: still navigate, but inform devs
+            if (error) {
+                toast({ title: "Signup failed", description: error.message || 'Please try again', variant: 'destructive' });
+                return;
             }
-        }
 
-        if (user) {
-            navigate(role === 'admin' ? '/admin' : '/dashboard');
+            if (user) {
+                navigate('/admin');
+            }
+        } else {
+            // For student signup, use the original logic
+            const { user, error } = await signUp(email.trim(), password.trim(), name.trim(), role);
+
+            if (error) {
+                toast({ title: "Signup failed", description: error.message || 'Please try again', variant: 'destructive' });
+                return;
+            }
+
+            if (user) {
+                navigate('/dashboard');
+            }
         }
     };
 
