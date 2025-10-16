@@ -121,21 +121,125 @@ const StudentDashboard = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-5 text-xl font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                <button
+                  className="button"
+                  data-text="Awesome"
+                  style={{
+                    margin: '0',
+                    height: 'auto',
+                    background: 'transparent',
+                    padding: '0',
+                    border: 'none',
+                    cursor: 'pointer',
+                    '--border-right': '6px',
+                    '--text-stroke-color': '#8957f7',
+                    '--animation-color': '#8957f7',
+                    '--fs-size': '1.9em',
+                    letterSpacing: '7px',
+                    textDecoration: 'none',
+                    fontSize: 'var(--fs-size)',
+                    fontFamily: 'Arial',
+                    position: 'relative',
+                    textTransform: 'uppercase',
+                    color: 'transparent',
+                    WebkitTextStroke: '12.5px var(--text-stroke-color)',
+                    whiteSpace: 'nowrap',
+                    minWidth: 'fit-content'
+                  }}
                   onClick={() => window.location.href = '/courses'}
                 >
-                  Explore Courses →
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-3 border-gray-300 text-gray-700 hover:bg-gray-50 px-10 py-5 text-xl font-bold rounded-full transition-all duration-300"
+                  <span className="actual-text" style={{
+                    color: 'black',
+                      opacity: 0.1,
+                    WebkitTextStroke: '1px var(--text-stroke-color)',
+                    whiteSpace: 'nowrap'
+                  }}>&nbsp;Explore Courses&nbsp;</span>
+                  <span aria-hidden="true" className="hover-text" style={{
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    width: '0%',
+                    height: '100%',
+                    color: 'var(--animation-color)',
+                    borderRight: 'var(--border-right) solid var(--animation-color)',
+                    overflow: 'hidden',
+                    transition: '0.5s',
+                    WebkitTextStroke: '2px var(--animation-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    whiteSpace: 'nowrap'
+                  }}>&nbsp;Explore Courses&nbsp;</span>
+                </button>
+                <button
+                  className="learn-more"
+                  style={{
+                    position: 'relative',
+                    display: 'inline-block',
+                    cursor: 'pointer',
+                    outline: 'none',
+                    border: '0',
+                    verticalAlign: 'middle',
+                    textDecoration: 'none',
+                    background: 'transparent',
+                    padding: '0',
+                    fontSize: 'inherit',
+                    fontFamily: 'inherit',
+                    width: '12rem',
+                    height: 'auto'
+                  }}
                   onClick={() => window.location.href = '/about'}
                 >
-                  Learn More
-                </Button>
+                  <span
+                    className="circle"
+                    aria-hidden="true"
+                    style={{
+                      transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                      position: 'relative',
+                      display: 'block',
+                      margin: '0',
+                      width: '3rem',
+                      height: '3rem',
+                      background: '#282936',
+                      borderRadius: '1.625rem'
+                    }}
+                  >
+                    <span
+                      className="icon arrow"
+                      style={{
+                        transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                        position: 'absolute',
+                        top: '0',
+                        bottom: '0',
+                        margin: 'auto',
+                        background: '#fff',
+                        left: '0.625rem',
+                        width: '1.125rem',
+                        height: '0.125rem'
+                      }}
+                    ></span>
+                  </span>
+                  <span
+                    className="button-text"
+                    style={{
+                      transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                      position: 'absolute',
+                      top: '0',
+                      left: '0',
+                      right: '0',
+                      bottom: '0',
+                      padding: '0.75rem 0',
+                      margin: '0 0 0 1.85rem',
+                      color: '#282936',
+                      fontWeight: '700',
+                      lineHeight: '1.6',
+                      textAlign: 'center',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    Learn More
+                  </span>
+                </button>
               </div>
             </motion.div>
           </div>

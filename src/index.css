@@ -40,6 +40,39 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Learn More Button Animation */
+button.learn-more:hover .circle {
+  width: 100% !important;
+}
+
+button.learn-more:hover .circle .icon.arrow {
+  background: #fff !important;
+  transform: translate(1rem, 0) !important;
+}
+
+button.learn-more:hover .button-text {
+  color: #fff !important;
+}
+
+/* Learn More Button Arrow */
+button.learn-more .circle .icon.arrow::before {
+  position: absolute !important;
+  content: "" !important;
+  top: -0.29rem !important;
+  right: 0.0625rem !important;
+  width: 0.625rem !important;
+  height: 0.625rem !important;
+  border-top: 0.125rem solid #fff !important;
+  border-right: 0.125rem solid #fff !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Explore Courses Button Animation */
+.button:hover .hover-text {
+  width: 100% !important;
+  filter: drop-shadow(0 0 23px var(--animation-color)) !important;
+}
+
 /* Custom animations for Footer */
 @keyframes glow {
   from {
