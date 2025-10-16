@@ -63,6 +63,31 @@ const StudentDashboard = () => {
         <Helmet>
           <title>JU Learning Portal - Jammu University</title>
           <meta name="description" content="Educational portal for Jammu University students with courses, notes, and learning resources" />
+          <style type="text/css">{`
+            /* From Uiverse.io by neerajbaniwal */
+            .btn-shine {
+              position: relative;
+              background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.9) 40%, rgba(147, 51, 234, 0.9) 60%, transparent 100%);
+              background-size: 200% 100%;
+              background-position: 200% 0;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: shine 6s infinite ease-in-out;
+              animation-fill-mode: forwards;
+            }
+
+            @keyframes shine {
+              0% {
+                background-position: 0% 0;
+              }
+              50% {
+                background-position: 100% 0;
+              }
+              100% {
+                background-position: 200% 0;
+              }
+            }
+          `}</style>
         </Helmet>
 
         {/* Public Hero Section */}
@@ -80,10 +105,13 @@ const StudentDashboard = () => {
               <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 shadow-lg">
                 <span className="text-sm font-semibold text-white">🏆 Jammu University's Premier Learning Platform</span>
               </div>
+                <br></br>
 
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 tracking-tight leading-none">
-                JU <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">LEARNING</span>
-              </h1>
+              <div className="relative inline-block">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 tracking-tight leading-none btn-shine">
+                  JU <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 btn-shine">LEARNING</span>
+                </h1>
+              </div>
 
               <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
                 Empowering Jammu University students with world-class education, skill development, and career growth opportunities through our comprehensive learning ecosystem
