@@ -58,14 +58,14 @@ const StudentDashboard = () => {
 
   // For non-authenticated users, show public home page
   if (!user) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Helmet>
-          <title>JU Learning Portal - Jammu University</title>
-          <meta name="description" content="Educational portal for Jammu University students with courses, notes, and learning resources" />
-            <style type="text/css">{`
-            /* From Uiverse.io by marcelodolza */
-            .button {
+      return (
+          <div className="min-h-screen bg-gray-50">
+              <Helmet>
+                  <title>JU Learning Portal - Jammu University</title>
+                  <meta name="description"
+                        content="Educational portal for Jammu University students with courses, notes, and learning resources"/>
+                  <style type="text/css">{`
+                .button {
               --white: #ffe7ff;
               --purple-100: #f4b1fd;
               --purple-200: #d190ff;
@@ -451,6 +451,28 @@ const StudentDashboard = () => {
               }
             }
 
+            .btn-shine {
+              position: relative;
+              background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.9) 40%, rgba(147, 51, 234, 0.9) 60%, transparent 100%);
+              background-size: 200% 100%;
+              background-position: 200% 0;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: shine 6s infinite ease-in-out;
+              animation-fill-mode: forwards;
+            }
+
+            @keyframes shine {
+              0% {
+                background-position: 0% 0;
+              }
+              50% {
+                background-position: 100% 0;
+              }
+              100% {
+                background-position: 200% 0;
+              }
+              
             @keyframes rotateArrowLine2 {
               50% {
                 transform: rotate(330deg);
@@ -484,338 +506,361 @@ const StudentDashboard = () => {
                 stroke-dasharray: 2 60;
                 stroke-dashoffset: -60;
               }
-            }
+              
+           
+              
+           }
           `}</style>
-        </Helmet>
+              </Helmet>
 
-        {/* Public Hero Section */}
-        <div className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50"></div>
+              {/* Public Hero Section */}
+              <div className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
+                  {/* Background Pattern */}
+                  <div
+                      className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50"></div>
 
-          <div className="relative z-10 text-center max-w-7xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-8"
-            >
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 shadow-lg">
-                <span className="text-sm font-semibold text-white">🏆 Jammu University's Premier Learning Platform</span>
-              </div>
-                <br></br>
+                  <div className="relative z-10 text-center max-w-7xl mx-auto px-4">
+                      <motion.div
+                          initial={{opacity: 0, y: 30}}
+                          animate={{opacity: 1, y: 0}}
+                          transition={{duration: 0.8, ease: "easeOut"}}
+                          className="mb-8"
+                      >
+                          <div
+                              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 shadow-lg">
+                              <span className="text-sm font-semibold text-white">🏆 Jammu University's Premier Learning Platform</span>
+                          </div>
+                          <br></br>
 
-              <div className="relative inline-block">
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 tracking-tight leading-none btn-shine">
-                  JU <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 btn-shine">LEARNING</span>
-                </h1>
-              </div>
+                          <div className="relative inline-block">
+                              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 tracking-tight leading-none btn-shine">
+                                  JU <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 btn-shine">LEARNING</span>
+                              </h1>
+                          </div>
 
-              <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
-                Empowering Jammu University students with world-class education, skill development, and career growth opportunities through our comprehensive learning ecosystem
-              </p>
-            </motion.div>
+                          <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
+                              Empowering Jammu University students with world-class education, skill development, and
+                              career growth opportunities through our comprehensive learning ecosystem
+                          </p>
+                      </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-16"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-blue-600 mb-3">500+</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Courses Available</div>
-                  <div className="text-gray-600">Comprehensive curriculum across all disciplines</div>
-                </div>
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-purple-600 mb-3">10K+</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Students Enrolled</div>
-                  <div className="text-gray-600">Active learners building their future</div>
-                </div>
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-indigo-600 mb-3">95%</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Success Rate</div>
-                  <div className="text-gray-600">Proven track record of student achievement</div>
-                </div>
-              </div>
-            </motion.div>
+                      <motion.div
+                          initial={{opacity: 0, y: 20}}
+                          animate={{opacity: 1, y: 0}}
+                          transition={{duration: 0.8, delay: 0.3}}
+                          className="mb-16"
+                      >
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+                              <div
+                                  className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                                  <div className="text-4xl font-black text-blue-600 mb-3">500+</div>
+                                  <div className="text-lg font-semibold text-gray-800 mb-2">Courses Available</div>
+                                  <div className="text-gray-600">Comprehensive curriculum across all disciplines</div>
+                              </div>
+                              <div
+                                  className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                                  <div className="text-4xl font-black text-purple-600 mb-3">10K+</div>
+                                  <div className="text-lg font-semibold text-gray-800 mb-2">Students Enrolled</div>
+                                  <div className="text-gray-600">Active learners building their future</div>
+                              </div>
+                              <div
+                                  className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                                  <div className="text-4xl font-black text-indigo-600 mb-3">95%</div>
+                                  <div className="text-lg font-semibold text-gray-800 mb-2">Success Rate</div>
+                                  <div className="text-gray-600">Proven track record of student achievement</div>
+                              </div>
+                          </div>
+                      </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <button
-                  className="button"
-                  data-text="Awesome"
-                  style={{
-                    margin: '0',
-                    height: 'auto',
-                    background: 'transparent',
-                    padding: '0',
-                    border: 'none',
-                    cursor: 'pointer',
-                    '--border-right': '6px',
-                    '--text-stroke-color': '#8957f7',
-                    '--animation-color': '#8957f7',
-                    '--fs-size': '1.9em',
-                    letterSpacing: '7px',
-                    textDecoration: 'none',
-                    fontSize: 'var(--fs-size)',
-                    fontFamily: 'Arial',
-                    position: 'relative',
-                    textTransform: 'uppercase',
-                    color: 'transparent',
-                    WebkitTextStroke: '12.5px var(--text-stroke-color)',
-                    whiteSpace: 'nowrap',
-                    minWidth: 'fit-content'
-                  }}
-                  onClick={() => window.location.href = '/courses'}
-                >
+                      <motion.div
+                          initial={{opacity: 0, y: 20}}
+                          animate={{opacity: 1, y: 0}}
+                          transition={{duration: 0.8, delay: 0.6}}
+                      >
+                          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                              <button
+                                  className="button"
+                                  data-text="Awesome"
+                                  style={{
+                                      margin: '0',
+                                      height: 'auto',
+                                      background: 'transparent',
+                                      padding: '0',
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      '--border-right': '6px',
+                                      '--text-stroke-color': '#8957f7',
+                                      '--animation-color': '#8957f7',
+                                      '--fs-size': '1.9em',
+                                      letterSpacing: '7px',
+                                      textDecoration: 'none',
+                                      fontSize: 'var(--fs-size)',
+                                      fontFamily: 'Arial',
+                                      position: 'relative',
+                                      textTransform: 'uppercase',
+                                      color: 'transparent',
+                                      WebkitTextStroke: '12.5px var(--text-stroke-color)',
+                                      whiteSpace: 'nowrap',
+                                      minWidth: 'fit-content'
+                                  }}
+                                  onClick={() => window.location.href = '/courses'}
+                              >
                   <span className="actual-text" style={{
-                    color: 'black',
+                      color: 'black',
                       opacity: 0.1,
-                    WebkitTextStroke: '1px var(--text-stroke-color)',
-                    whiteSpace: 'nowrap'
+                      WebkitTextStroke: '1px var(--text-stroke-color)',
+                      whiteSpace: 'nowrap'
                   }}>&nbsp;Explore Courses&nbsp;</span>
-                  <span aria-hidden="true" className="hover-text" style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '0%',
-                    height: '100%',
-                    color: 'var(--animation-color)',
-                    borderRight: 'var(--border-right) solid var(--animation-color)',
-                    overflow: 'hidden',
-                    transition: '0.5s',
-                    WebkitTextStroke: '2px var(--animation-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    whiteSpace: 'nowrap'
-                  }}>&nbsp;Explore Courses&nbsp;</span>
-                </button>
-                <button
-                  className="learn-more"
-                  style={{
-                    position: 'relative',
-                    display: 'inline-block',
-                    cursor: 'pointer',
-                    outline: 'none',
-                    border: '0',
-                    verticalAlign: 'middle',
-                    textDecoration: 'none',
-                    background: 'transparent',
-                    padding: '0',
-                    fontSize: 'inherit',
-                    fontFamily: 'inherit',
-                    width: '12rem',
-                    height: 'auto'
-                  }}
-                  onClick={() => window.location.href = '/about'}
-                >
+                                  <span aria-hidden="true" className="hover-text" style={{
+                                      position: 'absolute',
+                                      top: '0',
+                                      left: '0',
+                                      width: '0%',
+                                      height: '100%',
+                                      color: 'var(--animation-color)',
+                                      borderRight: 'var(--border-right) solid var(--animation-color)',
+                                      overflow: 'hidden',
+                                      transition: '0.5s',
+                                      WebkitTextStroke: '2px var(--animation-color)',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      whiteSpace: 'nowrap'
+                                  }}>&nbsp;Explore Courses&nbsp;</span>
+                              </button>
+                              <button
+                                  className="learn-more"
+                                  style={{
+                                      position: 'relative',
+                                      display: 'inline-block',
+                                      cursor: 'pointer',
+                                      outline: 'none',
+                                      border: '0',
+                                      verticalAlign: 'middle',
+                                      textDecoration: 'none',
+                                      background: 'transparent',
+                                      padding: '0',
+                                      fontSize: 'inherit',
+                                      fontFamily: 'inherit',
+                                      width: '12rem',
+                                      height: 'auto'
+                                  }}
+                                  onClick={() => window.location.href = '/about'}
+                              >
                   <span
-                    className="circle"
-                    aria-hidden="true"
-                    style={{
-                      transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
-                      position: 'relative',
-                      display: 'block',
-                      margin: '0',
-                      width: '3rem',
-                      height: '3rem',
-                      background: '#282936',
-                      borderRadius: '1.625rem'
-                    }}
+                      className="circle"
+                      aria-hidden="true"
+                      style={{
+                          transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                          position: 'relative',
+                          display: 'block',
+                          margin: '0',
+                          width: '3rem',
+                          height: '3rem',
+                          background: '#282936',
+                          borderRadius: '1.625rem'
+                      }}
                   >
                     <span
-                      className="icon arrow"
-                      style={{
-                        transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
-                        position: 'absolute',
-                        top: '0',
-                        bottom: '0',
-                        margin: 'auto',
-                        background: '#fff',
-                        left: '0.625rem',
-                        width: '1.125rem',
-                        height: '0.125rem'
-                      }}
+                        className="icon arrow"
+                        style={{
+                            transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                            position: 'absolute',
+                            top: '0',
+                            bottom: '0',
+                            margin: 'auto',
+                            background: '#fff',
+                            left: '0.625rem',
+                            width: '1.125rem',
+                            height: '0.125rem'
+                        }}
                     ></span>
                   </span>
-                  <span
-                    className="button-text"
-                    style={{
-                      transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
-                      position: 'absolute',
-                      top: '0',
-                      left: '0',
-                      right: '0',
-                      bottom: '0',
-                      padding: '0.75rem 0',
-                      margin: '0 0 0 1.85rem',
-                      color: '#282936',
-                      fontWeight: '700',
-                      lineHeight: '1.6',
-                      textAlign: 'center',
-                      textTransform: 'uppercase'
-                    }}
-                  >
+                                  <span
+                                      className="button-text"
+                                      style={{
+                                          transition: 'all 0.45s cubic-bezier(0.65, 0, 0.076, 1)',
+                                          position: 'absolute',
+                                          top: '0',
+                                          left: '0',
+                                          right: '0',
+                                          bottom: '0',
+                                          padding: '0.75rem 0',
+                                          margin: '0 0 0 1.85rem',
+                                          color: '#282936',
+                                          fontWeight: '700',
+                                          lineHeight: '1.6',
+                                          textAlign: 'center',
+                                          textTransform: 'uppercase'
+                                      }}
+                                  >
                     Learn More
                   </span>
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Public Content Sections */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          {/* Public Learning Resources */}
-          <section className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning Resources</h2>
-            <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
-                <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
-                <Link to="/courses" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-                  Explore Courses →
-                </Link>
+                              </button>
+                          </div>
+                      </motion.div>
+                  </div>
               </div>
 
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
-                <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your resume</p>
-                <Link to="/certifications" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-                  Get Certified →
-                </Link>
-              </div>
+              {/* Public Content Sections */}
+              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                  {/* Public Learning Resources */}
+                  <section className="mb-20">
+                      <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning
+                          Resources</h2>
+                      <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to
+                          succeed in your academic journey</p>
 
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
-                <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
-                <Link to="/study-groups" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
-                  Join Groups →
-                </Link>
-              </div>
-            </div>
-          </section>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                          <div
+                              className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                              <div
+                                  className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                  <BookOpen className="w-8 h-8 text-white"/>
+                              </div>
+                              <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
+                              <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
+                              <Link to="/courses"
+                                    className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                                  Explore Courses →
+                              </Link>
+                          </div>
 
-          {/* Call to Action */}
-          <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 md:p-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">Ready to Start Your Learning Journey?</h2>
-            <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">Join thousands of Jammu University students who are already learning with us. Sign up now and get started!</p>
-            <div className="flex justify-center mx-auto w-full">
-              {/* From Uiverse.io by marcelodolza */}
-              <button className="button"  onClick={() => window.location.href = '/signup'}>
-                <div className="bg"></div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 342 208"
-                  height="208"
-                  width="342"
-                  className="splash"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M281.133 64.9917C281.133 64.9917 287.96 49.8089 302.934 48.2295C317.908 46.6501 319.712 36.5272 319.712 36.5272"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M281.133 138.984C281.133 138.984 287.96 154.167 302.934 155.746C317.908 157.326 319.712 167.449 319.712 167.449"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M230.578 57.4476C230.578 57.4476 225.785 41.5051 236.061 30.4998C246.337 19.4945 244.686 12.9998 244.686 12.9998"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M230.578 150.528C230.578 150.528 225.785 166.471 236.061 177.476C246.337 188.481 244.686 194.976 244.686 194.976"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M170.392 57.0278C170.392 57.0278 173.89 42.1322 169.571 29.54C165.252 16.9478 168.751 2.05227 168.751 2.05227"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M170.392 150.948C170.392 150.948 173.89 165.844 169.571 178.436C165.252 191.028 168.751 205.924 168.751 205.924"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M112.609 57.4476C112.609 57.4476 117.401 41.5051 107.125 30.4998C96.8492 19.4945 98.5 12.9998 98.5 12.9998"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    d="M112.609 150.528C112.609 150.528 117.401 166.471 107.125 177.476C96.8492 188.481 98.5 194.976 98.5 194.976"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M62.2941 64.9917C62.2941 64.9917 55.4671 49.8089 40.4932 48.2295C25.5194 46.6501 23.7159 36.5272 23.7159 36.5272"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth="3"
-                    strokeOpacity="0.3"
-                    d="M62.2941 145.984C62.2941 145.984 55.4671 161.167 40.4932 162.746C25.5194 164.326 23.7159 174.449 23.7159 174.449"
-                  ></path>
-                </svg>
+                          <div
+                              className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                              <div
+                                  className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                  <Award className="w-8 h-8 text-white"/>
+                              </div>
+                              <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
+                              <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your
+                                  resume</p>
+                              <Link to="/certifications"
+                                    className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                                  Get Certified →
+                              </Link>
+                          </div>
 
-                <div className="wrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 221 42"
-                    height="42"
-                    width="221"
-                    className="path"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeWidth="3"
-                      d="M182.674 2H203C211.837 2 219 9.16344 219 18V24C219 32.8366 211.837 40 203 40H18C9.16345 40 2 32.8366 2 24V18C2 9.16344 9.16344 2 18 2H47.8855"
-                    ></path>
-                  </svg>
+                          <div
+                              className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                              <div
+                                  className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                  <Users className="w-8 h-8 text-white"/>
+                              </div>
+                              <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
+                              <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
+                              <Link to="/study-groups"
+                                    className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+                                  Join Groups →
+                              </Link>
+                          </div>
+                      </div>
+                  </section>
 
-                  <div className="outline"></div>
-                  <div className="content">
+                  {/* Call to Action */}
+                  <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 md:p-16 text-center">
+                      <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">Ready to Start Your Learning
+                          Journey?</h2>
+                      <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">Join thousands of
+                          Jammu University students who are already learning with us. Sign up now and get started!</p>
+                      <div className="flex justify-center mx-auto w-full">
+                          {/* From Uiverse.io by marcelodolza */}
+                          <button className="button" onClick={() => window.location.href = '/signup'}>
+                              <div className="bg"></div>
+                              <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 342 208"
+                                  height="208"
+                                  width="342"
+                                  className="splash"
+                              >
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M281.133 64.9917C281.133 64.9917 287.96 49.8089 302.934 48.2295C317.908 46.6501 319.712 36.5272 319.712 36.5272"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M281.133 138.984C281.133 138.984 287.96 154.167 302.934 155.746C317.908 157.326 319.712 167.449 319.712 167.449"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M230.578 57.4476C230.578 57.4476 225.785 41.5051 236.061 30.4998C246.337 19.4945 244.686 12.9998 244.686 12.9998"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M230.578 150.528C230.578 150.528 225.785 166.471 236.061 177.476C246.337 188.481 244.686 194.976 244.686 194.976"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M170.392 57.0278C170.392 57.0278 173.89 42.1322 169.571 29.54C165.252 16.9478 168.751 2.05227 168.751 2.05227"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M170.392 150.948C170.392 150.948 173.89 165.844 169.571 178.436C165.252 191.028 168.751 205.924 168.751 205.924"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M112.609 57.4476C112.609 57.4476 117.401 41.5051 107.125 30.4998C96.8492 19.4945 98.5 12.9998 98.5 12.9998"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      d="M112.609 150.528C112.609 150.528 117.401 166.471 107.125 177.476C96.8492 188.481 98.5 194.976 98.5 194.976"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M62.2941 64.9917C62.2941 64.9917 55.4671 49.8089 40.4932 48.2295C25.5194 46.6501 23.7159 36.5272 23.7159 36.5272"
+                                  ></path>
+                                  <path
+                                      strokeLinecap="round"
+                                      strokeWidth="3"
+                                      strokeOpacity="0.3"
+                                      d="M62.2941 145.984C62.2941 145.984 55.4671 161.167 40.4932 162.746C25.5194 164.326 23.7159 174.449 23.7159 174.449"
+                                  ></path>
+                              </svg>
+
+                              <div className="wrap">
+                                  <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 221 42"
+                                      height="42"
+                                      width="221"
+                                      className="path"
+                                  >
+                                      <path
+                                          strokeLinecap="round"
+                                          strokeWidth="3"
+                                          d="M182.674 2H203C211.837 2 219 9.16344 219 18V24C219 32.8366 211.837 40 203 40H18C9.16345 40 2 32.8366 2 24V18C2 9.16344 9.16344 2 18 2H47.8855"
+                                      ></path>
+                                  </svg>
+
+                                  <div className="outline"></div>
+                                  <div className="content">
                     <span className="char state-1">
                       <span data-label="J" style={{'--i': 1}}>J</span>
                       <span data-label="o" style={{'--i': 2}}>o</span>
@@ -828,11 +873,11 @@ const StudentDashboard = () => {
                       <span data-label="y" style={{'--i': 9}}>y</span>
                     </span>
 
-                    <div className="icon">
-                      <div></div>
-                    </div>
+                                      <div className="icon">
+                                          <div></div>
+                                      </div>
 
-                    <span className="char state-2">
+                                      <span className="char state-2">
                       <span data-label="J" style={{'--i': 1}}>J</span>
                       <span data-label="o" style={{'--i': 2}}>o</span>
                       <span data-label="i" style={{'--i': 3}}>i</span>
@@ -841,14 +886,14 @@ const StudentDashboard = () => {
                       <span data-label="o" style={{'--i': 6}}>o</span>
                       <span data-label="w" style={{'--i': 7}}>w</span>
                     </span>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </section>
-        </main>
-      </div>
-    );
+                                  </div>
+                              </div>
+                          </button>
+                      </div>
+                  </section>
+              </main>
+          </div>
+      );
   }
 
   // Authenticated user dashboard continues here...
