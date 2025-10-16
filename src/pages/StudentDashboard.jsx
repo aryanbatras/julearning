@@ -153,7 +153,7 @@ const StudentDashboard = () => {
                 transparent 100%
               );
               animation: spin 2s linear infinite;
-              animation-play-state: paused;
+              animation-play-state: paused;B
             }
 
             .content {
