@@ -147,12 +147,12 @@ const StudentDashboard = () => {
               height: 300px;
               margin: auto;
               background: linear-gradient(
-                to right,
+                to left,
                 transparent 0%,
                 #f8bbd9 50%,
                 transparent 100%
               );
-              animation: spin 3s linear infinite;
+              animation: spin 2s linear infinite;
               animation-play-state: paused;
             }
 
@@ -169,8 +169,7 @@ const StudentDashboard = () => {
               font-weight: 600;
               transition: all 0.3s ease;
               background: linear-gradient(
-                to bottom,
-                var(--purple-300) 0%,
+                var(--purple-300) 50%,
                 var(--purple-400) 100%
               );
               box-shadow:
@@ -296,7 +295,7 @@ const StudentDashboard = () => {
               stroke-dasharray: 60 60;
               stroke-dashoffset: 60;
               transform: translate(-17%, -31%);
-              stroke: var(--purple-300);
+              stroke: blue;
             }
 
             /** STATES */
@@ -450,29 +449,7 @@ const StudentDashboard = () => {
                 transform: rotate(55deg);
               }
             }
-
-            .btn-shine {
-              position: relative;
-              background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.9) 40%, rgba(147, 51, 234, 0.9) 60%, transparent 100%);
-              background-size: 200% 100%;
-              background-position: 200% 0;
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              animation: shine 6s infinite ease-in-out;
-              animation-fill-mode: forwards;
-            }
-
-            @keyframes shine {
-              0% {
-                background-position: 0% 0;
-              }
-              50% {
-                background-position: 100% 0;
-              }
-              100% {
-                background-position: 200% 0;
-              }
-              
+    
             @keyframes rotateArrowLine2 {
               50% {
                 transform: rotate(330deg);
@@ -501,15 +478,40 @@ const StudentDashboard = () => {
               }
             }
 
+            .btn-shine {
+              position: relative;
+              background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.9) 40%, rgba(147, 51, 234, 0.9) 60%, transparent 100%);
+              background-size: 200% 100%;
+              background-position: 200% 0;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: shine 6s infinite ease-in-out;
+              animation-fill-mode: forwards;
+            }
+
+            @keyframes shine {
+              0% {
+                background-position: 0% 0;
+              }
+              50% {
+                background-position: 100% 0;
+              }
+              100% {
+                background-position: 200% 0;
+              }
+          }
+
             @keyframes splash {
+              from {
+                stroke-dasharray: 60 60;
+                stroke-dashoffset: 60;
+              }
               to {
                 stroke-dasharray: 2 60;
                 stroke-dashoffset: -60;
               }
-              
-           
-              
-           }
+            }  
+                        
           `}</style>
               </Helmet>
 
