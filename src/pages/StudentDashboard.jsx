@@ -9,6 +9,7 @@ import { useToast } from '@/components/ui/use-toast';
 import RequestCourseForm from '@/components/RequestCourseForm';
 import { Link } from 'react-router-dom';
 import CourseCard from '@/components/CourseCard';
+import CustomSearchBar from '@/components/CustomSearchBar';
 
 // Stats component for the dashboard
 const StatCard = ({ icon: Icon, value, label, color }) => (
@@ -304,13 +305,10 @@ const StudentDashboard = () => {
             <p className="text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in-up">Your personalized learning dashboard is ready. Let's make today productive!</p>
 
             <div className="relative max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 transition-colors duration-300" />
-              <input
-                type="text"
-                placeholder="Search courses, topics, or resources..."
+              <CustomSearchBar
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-14 pr-6 py-5 text-lg border-0 rounded-2xl bg-white shadow-lg focus:ring-2 focus:ring-blue-500/50 focus:outline-none transition-all duration-300 hover:shadow-xl focus:scale-[1.02]"
+                placeholder="Search courses, topics, or resources..."
               />
             </div>
           </motion.div>
