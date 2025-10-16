@@ -308,7 +308,7 @@ const StudentDashboard = () => {
               <CustomSearchBar
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search courses, topics, or resources..."
+                placeholder="Search courses"
               />
             </div>
           </motion.div>
