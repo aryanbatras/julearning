@@ -112,13 +112,13 @@ body{
   top: 33px;
   right: 50px;
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   padding: 0;
   margin: 0;
   z-index: 999;
   overflow: hidden;
-  background-color: #353746;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(147, 51, 234, 0.9) 100%);
   animation: border-transform 7s linear infinite;
   transition: top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
               right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
@@ -212,9 +212,9 @@ body{
 
 .nav ul li a{
   font-family: 'Montserrat', sans-serif;
-  font-size: 4vh;
+  font-size: 7vh;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 4;
   font-weight: 800;
   display: inline-block;
   position: relative;
@@ -242,15 +242,36 @@ body{
   transition: width 250ms linear;
 }
 
-.nav ul li a:hover:after{
+.nav ul li:nth-child(1) a:hover:after{
   width: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.nav ul li:nth-child(2) a:hover:after{
+  width: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+}
+
+.nav ul li:nth-child(3) a:hover:after{
+  width: 100%;
+  background: linear-gradient(90deg, #ec4899, #f59e0b);
+}
+
+.nav ul li:nth-child(4) a:hover:after{
+  width: 100%;
+  background: linear-gradient(90deg, #f59e0b, #10b981);
+}
+
+.nav ul li:nth-child(5) a:hover:after{
+  width: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
 }
 
 .menu-icon:checked ~ .nav ul li {
   pointer-events: auto;
   visibility: visible;
   opacity: 0.75;
-  transform: scale(1.35);
+  transform: scale(1.45);
   transition: opacity 2.5s ease,
               transform 2s ease;
 }
@@ -295,10 +316,10 @@ body{
 
   /* Mobile-specific menu sizing */
   .menu-icon:checked ~ .nav {
-    width: 150vw;
-    height: 150vh;
-    top: -25vh;
-    right: -25vw;
+    width: 200vw;
+    height: 200vh;
+    top: -42vh;
+    right: -42vw;
     transform: none;
     border-radius: 0;
   }
@@ -457,237 +478,235 @@ body{
 `;
 
 const NavItem = ({ to, icon, children, onClick }) => (
-  <NavLink
-    to={to}
-    onClick={onClick}
-    className={({ isActive }) =>
-      `nav-item ${isActive ? 'active' : ''}`
-    }
-  >
-    <button className="nav-button">
-      {icon}
-      <span className="hidden lg:inline nav-text">{children}</span>
-    </button>
-  </NavLink>
+    <NavLink
+        to={to}
+        onClick={onClick}
+        className={({ isActive }) =>
+            `nav-item ${isActive ? 'active' : ''}`
+        }
+    >
+        <button className="nav-button">
+            {icon}
+            <span className="hidden lg:inline nav-text">{children}</span>
+        </button>
+    </NavLink>
 );
 
 const Navbar = () => {
-  const { user, profile, signOut } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { user, profile, signOut } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    // Inject elaborate menu styles into document head
-    const styleId = 'elaborate-menu-styles';
-    if (!document.getElementById(styleId)) {
-      const styleElement = document.createElement('style');
-      styleElement.id = styleId;
-      styleElement.textContent = elaborateMenuStyles;
-      document.head.appendChild(styleElement);
-    }
+    useEffect(() => {
+        // Inject elaborate menu styles into document head
+        const styleId = 'elaborate-menu-styles';
+        if (!document.getElementById(styleId)) {
+            const styleElement = document.createElement('style');
+            styleElement.id = styleId;
+            styleElement.textContent = elaborateMenuStyles;
+            document.head.appendChild(styleElement);
+        }
 
-    return () => {
-      // Cleanup function to remove styles when component unmounts
-      const existingStyle = document.getElementById(styleId);
-      if (existingStyle) {
-        existingStyle.remove();
-      }
+        return () => {
+            // Cleanup function to remove styles when component unmounts
+            const existingStyle = document.getElementById(styleId);
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+    }, [location.pathname]);
+
+    const handleLogout = async () => {
+        await signOut();
+        navigate('/login');
     };
-  }, []);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+    const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/login');
-  };
+    const getMobileMenuLinks = () => {
+        if (user) {
+            if (profile?.role === 'student') {
+                return (
+                    <>
+                        <li><a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a></li>
+                        <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
+                        <li><a href="/my-courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
+                        <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                        <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
+                    </>
+                );
+            } else if (profile?.role === 'admin') {
+                return (
+                    <>
+                        <li><a href="/admin" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a></li>
+                        <li><a href="/admin/courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
+                        <li><a href="/admin/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
+                        <li><a href="/admin/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                    </>
+                );
+            }
+        }
 
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
-
-  const getMobileMenuLinks = () => {
-    if (user) {
-      if (profile?.role === 'student') {
+        // Default links for non-logged in users
         return (
-          <>
-            <li><a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a></li>
-            <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
-            <li><a href="/my-courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
-            <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
-            <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
-          </>
+            <>
+                <li><a href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</a></li>
+                <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
+                <li><a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a></li>
+                <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
+            </>
         );
-      } else if (profile?.role === 'admin') {
-        return (
-          <>
-            <li><a href="/admin" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a></li>
-            <li><a href="/admin/courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
-            <li><a href="/admin/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
-            <li><a href="/admin/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
-          </>
-        );
-      }
-    }
+    };
 
-    // Default links for non-logged in users
     return (
-      <>
-        <li><a href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</a></li>
-        <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
-        <li><a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a></li>
-        <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
-        <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
-      </>
+        <>
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        <Link to={user ? (profile?.role === 'admin' ? '/admin' : '/dashboard') : '/'} className="flex items-center gap-2">
+                            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                                <GraduationCap className="w-6 h-6 text-white" />
+                            </div>
+                            <span className="text-xl font-bold text-secondary leading-none text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600  ">JU LEARNING</span>
+                        </Link>
+
+                        {user && profile ? (
+                            <div className="hidden md:flex items-center gap-1 text-sm">
+                                {profile.role === 'student' ? (
+                                    <>
+                                        <NavItem to="/dashboard" icon={<Home className="w-4 h-4" />}>Home</NavItem>
+                                        <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
+                                        <NavItem to="/my-courses" icon={<Library className="w-4 h-4" />}>Courses</NavItem>
+                                        <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                        <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
+                                    </>
+                                ) : (
+                                    // Admin navigation
+                                    <>
+                                        <NavItem to="/admin" icon={<Home className="w-4 h-4" />}>Dashboard</NavItem>
+                                        <NavItem to="/admin/courses" icon={<BookOpen className="w-4 h-4" />}>Courses</NavItem>
+                                        <NavItem to="/admin/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
+                                        <NavItem to="/admin/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                    </>
+                                )}
+                            </div>
+                        ) : (
+                            // Non-authenticated users - show basic navigation
+                            <div className="hidden md:flex items-center gap-1 text-sm">
+                                <NavItem to="/" icon={<Home className="w-4 h-4" />}>Home</NavItem>
+                                <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
+                                <NavItem to="/about" icon={<Users className="w-4 h-4" />}>About</NavItem>
+                                <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
+                            </div>
+                        )}
+
+                        <div className="flex items-center gap-2">
+                            {user && profile ? (
+                                <Button
+                                    onClick={handleLogout}
+                                    className="nav-button gap-2"
+                                    style={{
+                                        position: 'relative',
+                                        padding: '10px 20px',
+                                        borderRadius: '7px',
+                                        border: '1px solid transparent',
+                                        fontSize: '14px',
+                                        textTransform: 'uppercase',
+                                        fontWeight: '600',
+                                        letterSpacing: '2px',
+                                        background: 'transparent',
+                                        color: 'rgb(61, 106, 255)',  /* Blue text for better visibility */
+                                        overflow: 'hidden',
+                                        boxShadow: '0 0 0 0 transparent',
+                                        transition: 'all 0.2s ease-in',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <LogOut className="w-4 h-4" />
+                                    <span className="hidden sm:inline">Logout</span>
+                                </Button>
+                            ) : (
+                                <>
+                                    <Link to="/login">
+                                        <Button
+                                            className="nav-button"
+                                            style={{
+                                                position: 'relative',
+                                                padding: '8px 16px',
+                                                borderRadius: '7px',
+                                                border: '1px solid transparent',
+                                                fontSize: '12px',
+                                                textTransform: 'uppercase',
+                                                fontWeight: '600',
+                                                letterSpacing: '1.5px',
+                                                background: 'transparent',
+                                                color: 'rgb(61, 106, 255)',
+                                                overflow: 'hidden',
+                                                boxShadow: '0 0 0 0 transparent',
+                                                transition: 'all 0.2s ease-in',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '8px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <LogIn className="w-5 h-5" />
+                                            <span className="hidden sm:inline">Login</span>
+                                        </Button>
+                                    </Link>
+                                    <Link to="/signup">
+                                        <Button
+                                            className="nav-button"
+                                            style={{
+                                                position: 'relative',
+                                                padding: '8px 16px',
+                                                borderRadius: '7px',
+                                                border: '1px solid transparent',
+                                                fontSize: '12px',
+                                                textTransform: 'uppercase',
+                                                fontWeight: '600',
+                                                letterSpacing: '1.5px',
+                                                background: 'transparent',
+                                                color: 'rgb(61, 106, 255)',
+                                                overflow: 'hidden',
+                                                boxShadow: '0 0 0 0 transparent',
+                                                transition: 'all 0.2s ease-in',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '8px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <User className="w-5 h-5" />
+                                            <span className="hidden sm:inline">Sign Up</span>
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
+                            <div>
+                                <input className="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" checked={isMobileMenuOpen} onChange={(e) => setIsMobileMenuOpen(e.target.checked)} />
+                                <label htmlFor="menu-icon"></label>
+                                <nav className="nav">
+                                    <ul className="pt-5">
+                                        {getMobileMenuLinks()}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </>
     );
-  };
-
-  return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link to={user ? (profile?.role === 'admin' ? '/admin' : '/dashboard') : '/'} className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold text-secondary">
-                JU Learning
-              </span>
-            </Link>
-
-            {user && profile ? (
-              <div className="hidden md:flex items-center gap-1 text-sm">
-                {profile.role === 'student' ? (
-                  <>
-                    <NavItem to="/dashboard" icon={<Home className="w-4 h-4" />}>Home</NavItem>
-                    <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
-                    <NavItem to="/my-courses" icon={<Library className="w-4 h-4" />}>Courses</NavItem>
-                    <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
-                    <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
-                  </>
-                ) : (
-                  // Admin navigation
-                  <>
-                    <NavItem to="/admin" icon={<Home className="w-4 h-4" />}>Dashboard</NavItem>
-                    <NavItem to="/admin/courses" icon={<BookOpen className="w-4 h-4" />}>Courses</NavItem>
-                    <NavItem to="/admin/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
-                    <NavItem to="/admin/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
-                  </>
-                )}
-              </div>
-            ) : (
-              // Non-authenticated users - show basic navigation
-              <div className="hidden md:flex items-center gap-1 text-sm">
-                <NavItem to="/" icon={<Home className="w-4 h-4" />}>Home</NavItem>
-                <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
-                <NavItem to="/about" icon={<Users className="w-4 h-4" />}>About</NavItem>
-                <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
-                <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
-              </div>
-            )}
-
-            <div className="flex items-center gap-2">
-              {user && profile ? (
-                <Button
-                  onClick={handleLogout}
-                  className="nav-button gap-2"
-                  style={{
-                    position: 'relative',
-                    padding: '10px 20px',
-                    borderRadius: '7px',
-                    border: '1px solid transparent',
-                    fontSize: '14px',
-                    textTransform: 'uppercase',
-                    fontWeight: '600',
-                    letterSpacing: '2px',
-                    background: 'transparent',
-                    color: 'rgb(61, 106, 255)',  /* Blue text for better visibility */
-                    overflow: 'hidden',
-                    boxShadow: '0 0 0 0 transparent',
-                    transition: 'all 0.2s ease-in',
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span className="hidden sm:inline">Logout</span>
-                </Button>
-              ) : (
-                <>
-                  <Link to="/login">
-                    <Button
-                      className="nav-button"
-                      style={{
-                        position: 'relative',
-                        padding: '8px 16px',
-                        borderRadius: '7px',
-                        border: '1px solid transparent',
-                        fontSize: '12px',
-                        textTransform: 'uppercase',
-                        fontWeight: '600',
-                        letterSpacing: '1.5px',
-                        background: 'transparent',
-                        color: 'rgb(61, 106, 255)',
-                        overflow: 'hidden',
-                        boxShadow: '0 0 0 0 transparent',
-                        transition: 'all 0.2s ease-in',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <LogIn className="w-5 h-5" />
-                      <span className="hidden sm:inline">Login</span>
-                    </Button>
-                  </Link>
-                  <Link to="/signup">
-                    <Button
-                      className="nav-button"
-                      style={{
-                        position: 'relative',
-                        padding: '8px 16px',
-                        borderRadius: '7px',
-                        border: '1px solid transparent',
-                        fontSize: '12px',
-                        textTransform: 'uppercase',
-                        fontWeight: '600',
-                        letterSpacing: '1.5px',
-                        background: 'transparent',
-                        color: 'rgb(61, 106, 255)',
-                        overflow: 'hidden',
-                        boxShadow: '0 0 0 0 transparent',
-                        transition: 'all 0.2s ease-in',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <User className="w-5 h-5" />
-                      <span className="hidden sm:inline">Sign Up</span>
-                    </Button>
-                  </Link>
-                </>
-              )}
-              <div>
-                <input className="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" checked={isMobileMenuOpen} onChange={(e) => setIsMobileMenuOpen(e.target.checked)} />
-                <label htmlFor="menu-icon"></label>
-                <nav className="nav">
-                  <ul className="pt-5">
-                    {getMobileMenuLinks()}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </>
-  );
 };
 
 export default Navbar;
