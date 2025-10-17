@@ -332,6 +332,128 @@ body{
   width: auto;
   display: block;
 }
+
+/* New Animated Button Styles */
+.nav-item {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.nav-button {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid transparent;  /* Transparent border by default */
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: rgb(61, 106, 255);  /* Blue text for better visibility */
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background: rgb(61, 106, 255);
+  border: 1px solid rgb(61, 106, 255);  /* Show border on hover */
+  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  color: #fff;  /* White text on hover */
+}
+
+.nav-button:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.nav-button::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.nav-button:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+.nav-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgb(61, 106, 255);  /* Blue text for better visibility */
+}
+
+.nav-item.active .nav-button {
+  background: rgb(61, 106, 255);
+  color: #fff;
+}
+
+.nav-item.active .nav-text {
+  color: #fff;  /* White text for active state */
+}
+
+.nav-button:hover {
+  background: rgb(61, 106, 255) !important;
+  border: 1px solid rgb(61, 106, 255) !important;
+  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815) !important;
+  -webkit-transition: all 0.2s ease-out !important;
+  -moz-transition: all 0.2s ease-out !important;
+  transition: all 0.2s ease-out !important;
+  color: #fff !important;  /* Force white text on hover for all nav buttons */
+}
+
+.nav-button:hover .nav-text {
+  color: #fff !important;  /* Force white text in nav-text span on hover */
+}
+
+.nav-button:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear !important;
+  -moz-animation: sh02 0.5s 0s linear !important;
+  animation: sh02 0.5s 0s linear !important;
+}
 `;
 
 const NavItem = ({ to, icon, children, onClick }) => (
@@ -339,13 +461,13 @@ const NavItem = ({ to, icon, children, onClick }) => (
     to={to}
     onClick={onClick}
     className={({ isActive }) =>
-      `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
-        isActive ? 'bg-accent text-secondary' : 'text-gray-600 hover:bg-gray-100 hover:text-foreground'
-      }`
+      `nav-item ${isActive ? 'active' : ''}`
     }
   >
-    {icon}
-    <span className="hidden lg:inline">{children}</span>
+    <button className="nav-button">
+      {icon}
+      <span className="hidden lg:inline nav-text">{children}</span>
+    </button>
   </NavLink>
 );
 
@@ -470,8 +592,25 @@ const Navbar = () => {
               {user && profile ? (
                 <Button
                   onClick={handleLogout}
-                  variant="outline"
-                  className="gap-2 border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                  className="nav-button gap-2"
+                  style={{
+                    position: 'relative',
+                    padding: '10px 20px',
+                    borderRadius: '7px',
+                    border: '1px solid transparent',
+                    fontSize: '14px',
+                    textTransform: 'uppercase',
+                    fontWeight: '600',
+                    letterSpacing: '2px',
+                    background: 'transparent',
+                    color: 'rgb(61, 106, 255)',  /* Blue text for better visibility */
+                    overflow: 'hidden',
+                    boxShadow: '0 0 0 0 transparent',
+                    transition: 'all 0.2s ease-in',
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
                 >
                   <LogOut className="w-4 h-4" />
                   <span className="hidden sm:inline">Logout</span>
@@ -479,15 +618,57 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link to="/login">
-                    <Button variant="ghost" className="gap-2 hidden sm:flex">
-                      <LogIn className="w-4 h-4" />
-                      Login
+                    <Button
+                      className="nav-button"
+                      style={{
+                        position: 'relative',
+                        padding: '8px 16px',
+                        borderRadius: '7px',
+                        border: '1px solid transparent',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        fontWeight: '600',
+                        letterSpacing: '1.5px',
+                        background: 'transparent',
+                        color: 'rgb(61, 106, 255)',
+                        overflow: 'hidden',
+                        boxShadow: '0 0 0 0 transparent',
+                        transition: 'all 0.2s ease-in',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <LogIn className="w-5 h-5" />
+                      <span className="hidden sm:inline">Login</span>
                     </Button>
                   </Link>
                   <Link to="/signup">
-                    <Button className="gap-2">
-                      <User className="w-4 h-4" />
-                      Sign Up
+                    <Button
+                      className="nav-button"
+                      style={{
+                        position: 'relative',
+                        padding: '8px 16px',
+                        borderRadius: '7px',
+                        border: '1px solid transparent',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        fontWeight: '600',
+                        letterSpacing: '1.5px',
+                        background: 'transparent',
+                        color: 'rgb(61, 106, 255)',
+                        overflow: 'hidden',
+                        boxShadow: '0 0 0 0 transparent',
+                        transition: 'all 0.2s ease-in',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <User className="w-5 h-5" />
+                      <span className="hidden sm:inline">Sign Up</span>
                     </Button>
                   </Link>
                 </>
