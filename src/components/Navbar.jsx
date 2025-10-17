@@ -391,8 +391,8 @@ const Navbar = () => {
         return (
           <>
             <li><a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a></li>
-            <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
-            <li><a href="/my-courses" onClick={() => setIsMobileMenuOpen(false)}>My Courses</a></li>
+            <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
+            <li><a href="/my-courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
             <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
             <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
           </>
@@ -413,7 +413,7 @@ const Navbar = () => {
     return (
       <>
         <li><a href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</a></li>
-        <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
+        <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
         <li><a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a></li>
         <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
         <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
@@ -440,8 +440,8 @@ const Navbar = () => {
                 {profile.role === 'student' ? (
                   <>
                     <NavItem to="/dashboard" icon={<Home className="w-4 h-4" />}>Home</NavItem>
-                    <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Courses</NavItem>
-                    <NavItem to="/my-courses" icon={<Library className="w-4 h-4" />}>My Courses</NavItem>
+                    <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
+                    <NavItem to="/my-courses" icon={<Library className="w-4 h-4" />}>Courses</NavItem>
                     <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
                     <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
                   </>
@@ -459,7 +459,7 @@ const Navbar = () => {
               // Non-authenticated users - show basic navigation
               <div className="hidden md:flex items-center gap-1 text-sm">
                 <NavItem to="/" icon={<Home className="w-4 h-4" />}>Home</NavItem>
-                <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Courses</NavItem>
+                <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
                 <NavItem to="/about" icon={<Users className="w-4 h-4" />}>About</NavItem>
                 <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
                 <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
