@@ -5,7 +5,7 @@ const SmoothScroll = ({ children }) => {
   useEffect(() => {
     // Initialize Lenis with POLISHED PROFESSIONAL settings - slower but more elegant
     const lenis = new Lenis({
-      duration: 1.8, // Slower, more graceful scrolling for professional feel
+      duration: 4.5, // Slower, more graceful scrolling for professional feel
       easing: (t) => 1 - Math.pow(1 - t, 5), // Quintic easing for ultra-polished curves
       direction: 'vertical',
       gestureDirection: 'vertical',
