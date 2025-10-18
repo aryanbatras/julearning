@@ -108,7 +108,6 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             height: 320px;
             margin: 0 auto;
             position: relative;
-            overflow: hidden;
           }
 
           .course-content {

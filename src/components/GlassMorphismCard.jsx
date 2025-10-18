@@ -54,19 +54,21 @@ const GlassMorphismCard = ({
         .large-circle {
           height: 180px;
           width: 180px;
-          left: 45%;
-          top: 20%;
-          transform: translateX(-100%);
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
           background-image: linear-gradient(${primaryColor}, ${secondaryColor});
+          animation: ani 45s ease-in-out infinite;
         }
 
         .small-circle {
           height: 100px;
           width: 100px;
-          left: 40%;
-          bottom: 20%;
-          transform: translateX(-100%);
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
           background-image: linear-gradient(90deg, ${primaryColor}, ${secondaryColor});
+          animation: ani-small 45s ease-in-out infinite;
         }
 
         .glass-card {
@@ -80,7 +82,6 @@ const GlassMorphismCard = ({
           box-shadow:
             inset 2px 1px 6px rgba(255, 255, 255, 0.27),
             0 8px 32px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
           z-index: 0;
           background: rgba(255, 255, 255, 0.25);
         }
@@ -119,13 +120,37 @@ const GlassMorphismCard = ({
 
         @keyframes ani {
           0% {
-            transform: translateX(0%) scale(1);
+            transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg);
+          }
+          25% {
+            transform: translate(-50%, -50%) rotate(90deg) translateX(60px) rotate(-90deg);
           }
           50% {
-            transform: translateX(-100%) scale(0.8);
+            transform: translate(-50%, -50%) rotate(180deg) translateX(60px) rotate(-180deg);
+          }
+          75% {
+            transform: translate(-50%, -50%) rotate(270deg) translateX(60px) rotate(-270deg);
           }
           100% {
-            transform: translateX(0%) scale(1);
+            transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg);
+          }
+        }
+
+        @keyframes ani-small {
+          0% {
+            transform: translate(-50%, -50%) rotate(0deg) translateX(40px) rotate(0deg) scale(1);
+          }
+          25% {
+            transform: translate(-50%, -50%) rotate(-90deg) translateX(40px) rotate(90deg) scale(0.8);
+          }
+          50% {
+            transform: translate(-50%, -50%) rotate(-180deg) translateX(40px) rotate(180deg) scale(1);
+          }
+          75% {
+            transform: translate(-50%, -50%) rotate(-270deg) translateX(40px) rotate(270deg) scale(0.8);
+          }
+          100% {
+            transform: translate(-50%, -50%) rotate(-360deg) translateX(40px) rotate(360deg) scale(1);
           }
         }
 
