@@ -523,7 +523,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         await signOut();
-        navigate('/login');
+        navigate('/');
     };
 
     const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
