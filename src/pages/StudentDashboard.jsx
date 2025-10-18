@@ -12,7 +12,8 @@ import CourseCard from '@/components/CourseCard';
 import CustomSearchBar from '@/components/CustomSearchBar';
 import GlassMorphismCard from '@/components/GlassMorphismCard';
 
-// Enhanced Stats component for the dashboard with glass morphism design
+import EnhancedHeroSection from '@/components/EnhancedHeroSection';
+import { ModernProgressCard, ModernFeatureCard, ModernAchievementCard } from '@/components/ModernCards';
 const StatCard = ({ icon: Icon, value, label, color }) => {
   const cardContent = (
     <div className="stat-content">
@@ -1013,72 +1014,15 @@ const StudentDashboard = () => {
         <meta name="description" content="Your personal dashboard for courses and learning materials." />
       </Helmet>
 
-      {/* Personalized Welcome Section */}
-      <div className="relative bg-gradient-to-r from-blue-50 to-purple-50 py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,transparent)] opacity-30"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
-              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">{user?.user_metadata?.name?.split(' ')[0] || 'Student'}</span>! 👋
-            </h1>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in-up">Your personalized learning dashboard is ready. Let's make today productive!</p>
-
-            <div className="relative max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <CustomSearchBar
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search courses"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </div>
+      {/* Enhanced Welcome Section */}
+      <EnhancedHeroSection
+        userName={user?.user_metadata?.name?.split(' ')[0] || 'Student'}
+        searchTerm={searchTerm}
+        onSearchChange={(e) => setSearchTerm(e.target.value)}
+      />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Quick Actions Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">Continue Your Learning Journey</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Access your enrolled courses, explore new topics, and track your progress</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {[
-              { icon: BookOpen, value: enrolledCourses.size, label: "Enrolled Courses", color: "bg-gradient-to-br from-blue-500 to-blue-600" },
-              { icon: Award, value: "12", label: "Certificates Earned", color: "bg-gradient-to-br from-green-500 to-green-600" },
-              { icon: Clock, value: "24h", label: "Learning Streak", color: "bg-gradient-to-br from-purple-500 to-purple-600" },
-              { icon: BarChart2, value: "85%", label: "Course Completion", color: "bg-gradient-to-br from-amber-500 to-orange-500" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="transform-gpu"
-              >
-                <StatCard
-                  icon={stat.icon}
-                  value={stat.value}
-                  label={stat.label}
-                  color={stat.color}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Featured Learning Resources */}
         <section className="mb-20">
@@ -1128,44 +1072,132 @@ const StudentDashboard = () => {
           </AnimatePresence>
         </section>
 
-        {/* Learning Resources Grid */}
-        <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning Resources</h2>
-          <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
+        {/* Enhanced Progress Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-20"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+              Your Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Progress</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Track your achievements and see how far you've come</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <ModernProgressCard
+              icon={BookOpen}
+              title="Courses Completed"
+              current={enrolledCourses.size}
+              total={20}
+              percentage={(enrolledCourses.size / 20) * 100}
+              color="bg-gradient-to-br from-blue-500 to-blue-600"
+              delay={0}
+            />
+            <ModernProgressCard
+              icon={Award}
+              title="Certificates Earned"
+              current={12}
+              total={15}
+              percentage={80}
+              color="bg-gradient-to-br from-green-500 to-green-600"
+              delay={0.1}
+            />
+            <ModernProgressCard
+              icon={Clock}
+              title="Learning Streak"
+              current={24}
+              total={30}
+              percentage={80}
+              color="bg-gradient-to-br from-purple-500 to-purple-600"
+              delay={0.2}
+            />
+            <ModernProgressCard
+              icon={TrendingUp}
+              title="Course Completion"
+              current={85}
+              total={100}
+              percentage={85}
+              color="bg-gradient-to-br from-amber-500 to-orange-500"
+              delay={0.3}
+            />
+          </div>
+        </motion.div>
+
+        {/* Enhanced Learning Resources */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">
+            Explore Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Resources</span>
+          </h2>
+          <p className="text-lg text-gray-600 mb-16 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ModernFeatureCard
+              icon={BookOpen}
+              title="Academic Courses"
+              description="Comprehensive curriculum designed by expert faculty members"
+              color="from-blue-500 to-blue-600"
+              href="/courses"
+              linkText="Explore Courses →"
+              delay={0}
+            />
+            <ModernFeatureCard
+              icon={Award}
+              title="Certifications"
+              description="Industry-recognized certificates to boost your resume and career"
+              color="from-purple-500 to-purple-600"
+              href="/certifications"
+              linkText="Get Certified →"
+              delay={0.1}
+            />
+            <ModernFeatureCard
+              icon={Users}
+              title="Study Groups"
+              description="Collaborate with peers and learn together in interactive sessions"
+              color="from-green-500 to-green-600"
+              href="/study-groups"
+              linkText="Join Groups →"
+              delay={0.2}
+            />
+          </div>
+        </section>
+
+        {/* Recent Achievements */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+              Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Achievements</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Celebrate your learning milestones and unlock new badges</p>
+          </div>
+
+          <div className="flex justify-center gap-6 flex-wrap">
             {[
               {
-                icon: BookOpen,
-                title: "Academic Courses",
-                desc: "Comprehensive curriculum designed by expert faculty",
-                href: "/courses",
-                color: "from-blue-500 to-blue-600",
-                linkText: "Explore Courses →"
-              },
-              {
                 icon: Award,
-                title: "Certifications",
-                desc: "Industry-recognized certificates to boost your resume",
-                href: "/certifications",
-                color: "from-purple-500 to-purple-600",
-                linkText: "Get Certified →"
+                title: "Course Master",
+                description: "Completed 10 courses",
+                unlockedAt: "2024-01-15"
               },
               {
-                icon: Users,
-                title: "Study Groups",
-                desc: "Collaborate with peers and learn together",
-                href: "/study-groups",
-                color: "from-green-500 to-green-600",
-                linkText: "Join Groups →"
+                icon: TrendingUp,
+                title: "Streak Champion",
+                description: "30-day learning streak",
+                unlockedAt: "2024-01-10"
+              },
+              {
+                icon: Star,
+                title: "Top Performer",
+                description: "95% average score",
+                unlockedAt: "2024-01-05"
               }
-            ].map((resource, index) => (
-              <FeatureCard
+            ].map((achievement, index) => (
+              <ModernAchievementCard
                 key={index}
-                icon={resource.icon}
-                title={resource.title}
-                description={resource.desc}
-                color={resource.color}
+                achievement={achievement}
+                delay={index * 0.1}
               />
             ))}
           </div>
