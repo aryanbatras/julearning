@@ -205,7 +205,7 @@ const StudentDashboard = () => {
   // For non-authenticated users, show public home page
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
         <Helmet>
           <title>JU Learning Portal - Jammu University</title>
           <meta name="description" content="Educational portal for Jammu University students with courses, notes, and learning resources"/>
@@ -230,7 +230,7 @@ const StudentDashboard = () => {
               position: relative;
               width: 220px;
               height: 80px;
-              transform: rotate(353deg) skewX(4deg);
+              transform: none;
             }
 
             .bg {
@@ -442,8 +442,6 @@ const StudentDashboard = () => {
               transform: translate(-17%, -31%);
               stroke: blue;
             }
-
-            /** STATES */
 
             .button:hover .words {
               opacity: 1;
@@ -659,9 +657,52 @@ const StudentDashboard = () => {
           `}</style>
         </Helmet>
 
-        {/* Public Hero Section */}
-        <div className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50"></div>
+        {/* Hero Section with Animated Background */}
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Animated particle background */}
+          <div className="absolute inset-0">
+            <motion.div
+              className="absolute inset-0 opacity-30"
+              animate={{
+                background: [
+                  "radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%)",
+                  "radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%)",
+                  "radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%)",
+                  "radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%)"
+                ]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+
+          {/* Floating geometric shapes */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className={`absolute ${i % 3 === 0 ? 'w-32 h-32' : i % 3 === 1 ? 'w-24 h-24' : 'w-16 h-16'} ${
+                  i % 4 === 0 ? 'bg-gradient-to-br from-blue-400/20 to-purple-400/20' :
+                  i % 4 === 1 ? 'bg-gradient-to-br from-purple-400/20 to-pink-400/20' :
+                  i % 4 === 2 ? 'bg-gradient-to-br from-indigo-400/20 to-blue-400/20' :
+                  'bg-gradient-to-br from-cyan-400/20 to-indigo-400/20'
+                } ${i % 2 === 0 ? 'rotate-45' : 'rounded-full'}`}
+                style={{
+                  left: `${10 + i * 12}%`,
+                  top: `${15 + (i % 4) * 20}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  rotate: i % 2 === 0 ? [45, 225, 45] : [0, 360, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 10 + i * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
 
           <div className="relative z-10 text-center max-w-7xl mx-auto px-4">
             <motion.div
@@ -670,9 +711,18 @@ const StudentDashboard = () => {
               transition={{duration: 0.8, ease: "easeOut"}}
               className="mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 shadow-lg">
-                <span className="text-sm font-semibold text-white">🏆 Jammu University's Premier Learning Platform</span>
-              </div>
+              {/* Animated badge */}
+              <motion.div
+                initial={{opacity: 0, scale: 0.8}}
+                animate={{opacity: 1, scale: 1}}
+                transition={{delay: 0.2, duration: 0.6}}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-sm rounded-full mb-8 border border-white/20"
+              >
+                <Award className="w-4 h-4 text-blue-600" />
+                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Jammu University's Premier Learning Platform
+                </span>
+              </motion.div>
 
               <div className="relative inline-block">
                 <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 tracking-tight leading-none btn-shine">
@@ -691,22 +741,67 @@ const StudentDashboard = () => {
               transition={{duration: 0.8, delay: 0.3}}
               className="mb-16"
             >
+              {/* Enhanced Stats Section */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-blue-600 mb-3">500+</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Courses Available</div>
-                  <div className="text-gray-600">Comprehensive curriculum across all disciplines</div>
-                </div>
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-purple-600 mb-3">10K+</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Students Enrolled</div>
-                  <div className="text-gray-600">Active learners building their future</div>
-                </div>
-                <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className="text-4xl font-black text-indigo-600 mb-3">95%</div>
-                  <div className="text-lg font-semibold text-gray-800 mb-2">Success Rate</div>
-                  <div className="text-gray-600">Proven track record of student achievement</div>
-                </div>
+                <motion.div
+                  initial={{opacity: 0, y: 20}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{delay: 0.4, duration: 0.6}}
+                  className="relative group"
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
+                    <motion.div
+                      className="text-4xl font-black text-blue-600 mb-3"
+                      animate={{scale: [1, 1.05, 1]}}
+                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut"}}
+                    >
+                      500+
+                    </motion.div>
+                    <div className="text-lg font-semibold text-gray-800 mb-2">Courses Available</div>
+                    <div className="text-gray-600">Comprehensive curriculum across all disciplines</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{opacity: 0, y: 20}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{delay: 0.6, duration: 0.6}}
+                  className="relative group"
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
+                    <motion.div
+                      className="text-4xl font-black text-purple-600 mb-3"
+                      animate={{scale: [1, 1.05, 1]}}
+                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5}}
+                    >
+                      10K+
+                    </motion.div>
+                    <div className="text-lg font-semibold text-gray-800 mb-2">Students Enrolled</div>
+                    <div className="text-gray-600">Active learners building their future</div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{opacity: 0, y: 20}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{delay: 0.8, duration: 0.6}}
+                  className="relative group"
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
+                    <motion.div
+                      className="text-4xl font-black text-indigo-600 mb-3"
+                      animate={{scale: [1, 1.05, 1]}}
+                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1}}
+                    >
+                      95%
+                    </motion.div>
+                    <div className="text-lg font-semibold text-gray-800 mb-2">Success Rate</div>
+                    <div className="text-gray-600">Proven track record of student achievement</div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -716,6 +811,7 @@ const StudentDashboard = () => {
               transition={{duration: 0.8, delay: 0.6}}
             >
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                {/* EXPLORE COURSES BUTTON - PRESERVED */}
                 <button
                   className="button"
                   data-text="Awesome"
@@ -766,6 +862,8 @@ const StudentDashboard = () => {
                     whiteSpace: 'nowrap'
                   }}>&nbsp;Explore Courses&nbsp;</span>
                 </button>
+
+                {/* LEARN MORE BUTTON - PRESERVED */}
                 <button
                   className="learn-more"
                   style={{
@@ -840,140 +938,229 @@ const StudentDashboard = () => {
           </div>
         </div>
 
-        {/* Public Content Sections */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          {/* Public Learning Resources */}
-          <section className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning Resources</h2>
-            <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
+        {/* Enhanced Learning Resources Section */}
+        <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* Floating background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={i}
+                className={`absolute w-2 h-2 ${i % 3 === 0 ? 'bg-blue-400/30' : i % 3 === 1 ? 'bg-purple-400/30' : 'bg-indigo-400/30'} rounded-full`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -20, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [0.8, 1.2, 0.8],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </div>
+
+          <section className="mb-20 relative">
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              whileInView={{opacity: 1, y: 0}}
+              transition={{duration: 0.8}}
+              viewport={{once: true}}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-black flex items-center justify-center gap-3 mb-4">
+                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">Explore Learning Resources</span>
+                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
-                <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
-                <Link to="/courses" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-                  Explore Courses →
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Award className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
-                <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your resume</p>
-                <Link to="/certifications" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-                  Get Certified →
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Users className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
-                <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
-                <Link to="/study-groups" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
-                  Join Groups →
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          {/* Public Learning Resources */}
-          <section className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning Resources</h2>
-            <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
-                <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
-                <Link to="/courses" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-                  Explore Courses →
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Award className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
-                <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your resume</p>
-                <Link to="/certifications" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-                  Get Certified →
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Users className="w-8 h-8 text-white"/>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
-                <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
-                <Link to="/study-groups" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
-                  Join Groups →
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          {/* Call to Action */}
-          <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 md:p-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">Ready to Start Your Learning Journey?</h2>
-            <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">Join thousands of Jammu University students who are already learning with us. Sign up now and get started!</p>
-            <div className="flex justify-center mx-auto w-full">
-              <button className="button" onClick={() => window.location.href = '/signup'}>
-                <div className="bg"></div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 342 208"
-                  height="208"
-                  width="342"
-                  className="splash"
+              {[
+                {
+                  icon: BookOpen,
+                  title: "Academic Courses",
+                  description: "Comprehensive curriculum designed by expert faculty",
+                  gradient: "from-blue-500 to-blue-600",
+                  link: "/courses",
+                  delay: 0
+                },
+                {
+                  icon: Award,
+                  title: "Certifications",
+                  description: "Industry-recognized certificates to boost your resume",
+                  gradient: "from-purple-500 to-purple-600",
+                  link: "/certifications",
+                  delay: 0.1
+                },
+                {
+                  icon: Users,
+                  title: "Study Groups",
+                  description: "Collaborate with peers and learn together",
+                  gradient: "from-green-500 to-green-600",
+                  link: "/study-groups",
+                  delay: 0.2
+                }
+              ].map((resource, index) => (
+                <motion.div
+                  key={index}
+                  initial={{opacity: 0, y: 20}}
+                  whileInView={{opacity: 1, y: 0}}
+                  transition={{duration: 0.6, delay: resource.delay}}
+                  viewport={{once: true}}
+                  className="relative group"
                 >
-                  <path strokeLinecap="round" strokeWidth="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"></path>
-                  <path strokeLinecap="round" strokeWidth="3" d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"></path>
-                </svg>
-                <div className="wrap">
-                  <div className="outline"></div>
-                  <div className="content">
-                    <span className="char state-1">
-                      <span data-label="J" style={{'--i': 1}}>J</span>
-                      <span data-label="o" style={{'--i': 2}}>o</span>
-                      <span data-label="i" style={{'--i': 3}}>i</span>
-                      <span data-label="n" style={{'--i': 4}}>n</span>
-                      <span data-label="T" style={{'--i': 5}}>T</span>
-                      <span data-label="o" style={{'--i': 6}}>o</span>
-                      <span data-label="d" style={{'--i': 7}}>d</span>
-                      <span data-label="a" style={{'--i': 8}}>a</span>
-                      <span data-label="y" style={{'--i': 9}}>y</span>
-                    </span>
-                    <div className="icon">
-                      <div></div>
-                    </div>
-                    <span className="char state-2">
-                      <span data-label="J" style={{'--i': 1}}>J</span>
-                      <span data-label="o" style={{'--i': 2}}>o</span>
-                      <span data-label="i" style={{'--i': 3}}>i</span>
-                      <span data-label="n" style={{'--i': 4}}>n</span>
-                      <span data-label="N" style={{'--i': 5}}>N</span>
-                      <span data-label="o" style={{'--i': 6}}>o</span>
-                      <span data-label="w" style={{'--i': 7}}>w</span>
-                    </span>
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt`}></div>
+                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
+                    <motion.div
+                      className={`w-16 h-16 bg-gradient-to-br ${resource.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+                      whileHover={{scale: 1.1, rotate: 5}}
+                      transition={{type: "spring", stiffness: 400, damping: 10}}
+                    >
+                      <resource.icon className="w-8 h-8 text-white"/>
+                    </motion.div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{resource.title}</h3>
+                    <p className="text-gray-600 mb-6">{resource.description}</p>
+                    <Link
+                      to={resource.link}
+                      className={`inline-flex items-center font-semibold transition-colors text-lg`}
+                      style={{
+                        color: `var(--${resource.gradient.split('-')[1].replace('500', '600')})`,
+                      }}
+                    >
+                      Explore →
+                    </Link>
                   </div>
-                </div>
-              </button>
+                </motion.div>
+              ))}
             </div>
           </section>
+
+          {/* Enhanced Call to Action */}
+          <motion.section
+            initial={{opacity: 0, y: 20}}
+            whileInView={{opacity: 1, y: 0}}
+            transition={{duration: 0.8}}
+            viewport={{once: true}}
+            className="relative bg-gradient-to-r from-blue-50/80 via-purple-50/80 to-indigo-50/80 backdrop-blur-sm rounded-3xl p-12 md:p-16 text-center border border-white/20"
+          >
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden rounded-3xl">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute w-20 h-20 ${i % 2 === 0 ? 'bg-blue-400/10' : 'bg-purple-400/10'} rounded-full`}
+                  style={{
+                    left: `${20 + i * 15}%`,
+                    top: `${10 + (i % 3) * 20}%`,
+                  }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3 + i,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="relative z-10">
+              <motion.h2
+                className="text-3xl md:text-4xl font-black text-gray-900 mb-6"
+                animate={{
+                  textShadow: [
+                    "0 0 0px rgba(59, 130, 246, 0)",
+                    "0 0 20px rgba(139, 92, 246, 0.3)",
+                    "0 0 0px rgba(59, 130, 246, 0)"
+                  ]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                Ready to Start Your Learning Journey?
+              </motion.h2>
+              <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
+                Join thousands of Jammu University students who are already learning with us. Sign up now and get started!
+              </p>
+
+              {/* JOIN TODAY BUTTON - PRESERVED */}
+              <div className="flex justify-center mx-auto w-full">
+                <button className="button" onClick={() => window.location.href = '/signup'}>
+                  <div className="bg"></div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 342 208"
+                    height="208"
+                    width="342"
+                    className="splash"
+                  >
+                    <path strokeLinecap="round" strokeWidth="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"></path>
+                    <path strokeLinecap="round" strokeWidth="3" d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"></path>
+                  </svg>
+                  <div className="wrap">
+                    <div className="outline"></div>
+                    <div className="content">
+                      <span className="char state-1">
+                        <span data-label="J" style={{'--i': 1}}>J</span>
+                        <span data-label="o" style={{'--i': 2}}>o</span>
+                        <span data-label="i" style={{'--i': 3}}>i</span>
+                        <span data-label="n" style={{'--i': 4}}>n</span>
+                        <span data-label="T" style={{'--i': 5}}>T</span>
+                        <span data-label="o" style={{'--i': 6}}>o</span>
+                        <span data-label="d" style={{'--i': 7}}>d</span>
+                        <span data-label="a" style={{'--i': 8}}>a</span>
+                        <span data-label="y" style={{'--i': 9}}>y</span>
+                      </span>
+                      <div className="icon">
+                        <div></div>
+                      </div>
+                      <span className="char state-2">
+                        <span data-label="J" style={{'--i': 1}}>J</span>
+                        <span data-label="o" style={{'--i': 2}}>o</span>
+                        <span data-label="i" style={{'--i': 3}}>i</span>
+                        <span data-label="n" style={{'--i': 4}}>n</span>
+                        <span data-label="N" style={{'--i': 5}}>N</span>
+                        <span data-label="o" style={{'--i': 6}}>o</span>
+                        <span data-label="w" style={{'--i': 7}}>w</span>
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </motion.section>
         </main>
+
+        <style jsx>{`
+          .animate-tilt {
+            animation: tilt 6s ease-in-out infinite;
+          }
+
+          @keyframes tilt {
+            0%, 50%, 100% {
+              transform: rotate(0deg);
+            }
+            25% {
+              transform: rotate(3deg);
+            }
+            75% {
+              transform: rotate(-3deg);
+            }
+          }
+        `}</style>
       </div>
     );
   }
