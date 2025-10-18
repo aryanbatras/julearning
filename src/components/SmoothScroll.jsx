@@ -1,59 +1,76 @@
-import { useEffect } from 'react';
+// SmoothScroll.jsx
+import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 
 const SmoothScroll = ({ children }) => {
+  const lenisRef = useRef(null);
+  const rafRef = useRef(null);
+
   useEffect(() => {
-    // Initialize Lenis with POLISHED PROFESSIONAL settings - slower but more elegant
+    // SSR guard
+    if (typeof window === 'undefined') return;
+
+    // Respect user's motion preference
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Do not enable smooth scrolling for users who prefer reduced motion.
+      return;
+    }
+
+    // Create Lenis with tuned options for smooth, elegant scrolling
     const lenis = new Lenis({
-      duration: 4.5, // Slower, more graceful scrolling for professional feel
-      easing: (t) => 1 - Math.pow(1 - t, 5), // Quintic easing for ultra-polished curves
+      duration: 6.2,                     // slower, graceful feeling
+      easing: (t) => 1 - Math.pow(1 - t, 4), // smooth quartic curve
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
-      mouseMultiplier: 0.6, // Reduced sensitivity for polished, professional feel
-      smoothTouch: false,
-      touchMultiplier: 0.8, // Gentle touch response
+      smoothTouch: true,                 // smooth on touch devices too
+      mouseMultiplier: 0.9,              // gentle mouse wheel sensitivity
+      touchMultiplier: 0.9,              // gentle touch sensitivity
+      wheelMultiplier: 0.75,
       infinite: false,
-      lerp: 0.1, // Very smooth interpolation for polished animation
+      lerp: 0.07,                        // smoother interpolation without large lag
       orientation: 'vertical',
-      prevent: (node) => node.id === 'no-smooth',
-      syncTouch: false,
-      wheelMultiplier: 0.5, // Gentle wheel sensitivity for professional feel
+      syncTouch: true,                   // better synchronization for touch
+      // Prevent smoothing on nodes containing id="no-smooth"
+      prevent: (node) => !!node && node.id === 'no-smooth',
     });
 
-    // Polished animation loop with consistent timing
-    let rafId;
-    let lastTime = 0;
+    lenisRef.current = lenis;
+
+    // Simple, continuous RAF loop — let Lenis manage frame timing
     const raf = (time) => {
-      // Consistent frame timing for professional smoothness
-      if (time - lastTime >= 16) { // ~60fps
-        lenis.raf(time);
-        lastTime = time;
-      }
-      rafId = requestAnimationFrame(raf);
+      lenis.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
     };
 
-    rafId = requestAnimationFrame(raf);
+    rafRef.current = requestAnimationFrame(raf);
 
-    // Professional resize handling
-    let resizeTimeout;
+    // Resize / orientation handling
+    let resizeTimer;
     const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
+      // debounce a tiny bit to avoid thrashing during continuous resize
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
         lenis.resize();
-      }, 75); // Slightly slower for polished feel
+      }, 16);
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize);
 
-    // Clean professional cleanup
+    // Cleanup
     return () => {
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-      }
-      clearTimeout(resizeTimeout);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
-      lenis.destroy();
+      window.removeEventListener('orientationchange', handleResize);
+      if (lenisRef.current) {
+        try {
+          lenisRef.current.destroy();
+        } catch (e) {
+          // safe fallback
+        }
+      }
     };
   }, []);
 
