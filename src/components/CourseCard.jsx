@@ -52,6 +52,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
     </div>
   );
 
+  const thumbnailUrl = course.thumbnail_url || 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+
   return (
     <>
       <CreatorInfoModal course={course} isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
@@ -63,6 +65,40 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
           secondaryColor="#ef4444"
           className="course-glass-card"
         >
+          {/* Animated coin-flip thumbnail - top left */}
+          <motion.div
+            animate={{
+              rotateY: [0, 180, 360],
+            }}
+            transition={{
+              rotateY: {
+                duration: 12,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+            className="coin-flip-thumbnail"
+          >
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+                y: -2,
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="thumbnail-coin-container"
+            >
+              <div className="thumbnail-coin">
+                <img
+                  src={thumbnailUrl}
+                  alt={`${course.name} preview`}
+                  className="thumbnail-coin-image"
+                  loading="lazy"
+                />
+              </div>
+              <div className="thumbnail-coin-glow"></div>
+            </motion.div>
+          </motion.div>
+
           {cardContent}
         </GlassMorphismCard>
 
@@ -71,6 +107,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             width: 280px;
             height: 320px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
           }
 
           .course-content {
@@ -79,6 +117,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             height: 100%;
             justify-content: space-between;
             padding: 8px;
+            position: relative;
+            z-index: 2;
           }
 
           .course-title-section {
@@ -182,6 +222,68 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
           .course-status-badge.paid {
             background: #f59e0b;
             color: white;
+          }
+
+          /* Coin-flip thumbnail animation */
+          .coin-flip-thumbnail {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            z-index: 3;
+            pointer-events: none;
+          }
+
+          .thumbnail-coin-container {
+            position: relative;
+          }
+
+          .thumbnail-coin {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+              0 4px 16px rgba(0, 0, 0, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          }
+
+          .thumbnail-coin-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+
+          .thumbnail-coin-glow {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,
+              rgba(102, 126, 234, 0.3),
+              rgba(118, 75, 162, 0.3),
+              rgba(240, 147, 251, 0.3),
+              rgba(245, 87, 108, 0.3)
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+
+          .thumbnail-coin-container:hover .thumbnail-coin-glow {
+            opacity: 1;
+          }
+
+          /* Enhanced hover effects */
+          .thumbnail-coin-container:hover .thumbnail-coin {
+            transform: scale(1.05);
+            box-shadow:
+              0 6px 20px rgba(0, 0, 0, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
           }
         `}</style>
       </div>
