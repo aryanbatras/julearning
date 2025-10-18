@@ -883,6 +883,47 @@ const StudentDashboard = () => {
             </div>
           </section>
 
+          {/* Public Learning Resources */}
+          <section className="mb-20">
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">Explore Learning Resources</h2>
+            <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <BookOpen className="w-8 h-8 text-white"/>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Academic Courses</h3>
+                <p className="text-gray-600 mb-6">Comprehensive curriculum designed by expert faculty</p>
+                <Link to="/courses" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                  Explore Courses →
+                </Link>
+              </div>
+
+              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Award className="w-8 h-8 text-white"/>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Certifications</h3>
+                <p className="text-gray-600 mb-6">Industry-recognized certificates to boost your resume</p>
+                <Link to="/certifications" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                  Get Certified →
+                </Link>
+              </div>
+
+              <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Users className="w-8 h-8 text-white"/>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Study Groups</h3>
+                <p className="text-gray-600 mb-6">Collaborate with peers and learn together</p>
+                <Link to="/study-groups" className="text-green-600 font-semibold hover:text-green-700 transition-colors">
+                  Join Groups →
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* Call to Action */}
           <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 md:p-16 text-center">
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">Ready to Start Your Learning Journey?</h2>
@@ -1133,89 +1174,27 @@ const StudentDashboard = () => {
           className="mb-20"
         >
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Your Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Progress</span>
+            <h2 className="text-2xl md:text-2xl font-black text-gray-900 mb-4">
+               <span className='text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500'>Your Learning </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r to-yellow-500 from-orange-500">Progress</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Track your achievements and see how far you've come</p>
+            <p className="text-xl text-gray-500 max-w-xl mx-auto">Track your enrollment progress and discover new learning opportunities</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <ModernProgressCard
-              icon={BookOpen}
-              title="Courses Completed"
-              current={enrolledCourses.size}
-              total={20}
-              percentage={(enrolledCourses.size / 20) * 100}
-              color="bg-gradient-to-br from-blue-500 to-blue-600"
-              delay={0}
-            />
-            <ModernProgressCard
-              icon={Award}
-              title="Certificates Earned"
-              current={12}
-              total={15}
-              percentage={80}
-              color="bg-gradient-to-br from-green-500 to-green-600"
-              delay={0.1}
-            />
-            <ModernProgressCard
-              icon={Clock}
-              title="Learning Streak"
-              current={24}
-              total={30}
-              percentage={80}
-              color="bg-gradient-to-br from-purple-500 to-purple-600"
-              delay={0.2}
-            />
-            <ModernProgressCard
-              icon={TrendingUp}
-              title="Course Completion"
-              current={85}
-              total={100}
-              percentage={85}
-              color="bg-gradient-to-br from-amber-500 to-orange-500"
-              delay={0.3}
-            />
+          <div className="w-full flex justify-center px-4">
+            <div className="text-center max-w-sm">
+              <ModernProgressCard
+                icon={BookOpen}
+                title="Courses Enrolled"
+                current={enrolledCourses.size}
+                total={courses.length}
+                percentage={(enrolledCourses.size / courses.length) * 100 || 0}
+                color="bg-gradient-to-br from-blue-500 to-blue-600"
+                delay={0}
+              />
+            </div>
           </div>
         </motion.div>
-
-        {/* Enhanced Learning Resources */}
-        <section className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 text-center">
-            Explore Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Resources</span>
-          </h2>
-          <p className="text-lg text-gray-600 mb-16 text-center max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ModernFeatureCard
-              icon={BookOpen}
-              title="Academic Courses"
-              description="Comprehensive curriculum designed by expert faculty members"
-              color="from-blue-500 to-blue-600"
-              href="/courses"
-              linkText="Explore Courses →"
-              delay={0}
-            />
-            <ModernFeatureCard
-              icon={Award}
-              title="Certifications"
-              description="Industry-recognized certificates to boost your resume and career"
-              color="from-purple-500 to-purple-600"
-              href="/certifications"
-              linkText="Get Certified →"
-              delay={0.1}
-            />
-            <ModernFeatureCard
-              icon={Users}
-              title="Study Groups"
-              description="Collaborate with peers and learn together in interactive sessions"
-              color="from-green-500 to-green-600"
-              href="/study-groups"
-              linkText="Join Groups →"
-              delay={0.2}
-            />
-          </div>
-        </section>
 
         {/* Achievements */}
         <section className="mb-20">
