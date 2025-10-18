@@ -1007,6 +1007,59 @@ const StudentDashboard = () => {
     }
   };
 
+  const generateDynamicAchievements = useCallback((enrolledCount) => {
+    const achievementLevels = [
+      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#d4af37" },
+      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#ffd700" },
+      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#ffed4e" },
+      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#daa520" },
+      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#b8860b" },
+      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#cd853f" },
+      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#deb887" },
+      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#f4a460" },
+      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#d2b48c" },
+      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#f5deb3" }
+    ];
+
+    return achievementLevels
+      .filter(level => enrolledCount >= level.count)
+      .slice(-3) // Show only the last 3 unlocked achievements
+      .map((level, index) => ({
+        icon: level.icon,
+        title: level.title,
+        description: level.description,
+        unlockedAt: new Date().toISOString().split('T')[0],
+        hexColor: level.hexColor,
+        enrolledCount: level.count
+      }));
+  }, []);
+
+  const generateUpcomingAchievements = useCallback((enrolledCount) => {
+    const achievementLevels = [
+      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#d4af37" },
+      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#ffd700" },
+      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#ffed4e" },
+      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#daa520" },
+      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#b8860b" },
+      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#cd853f" },
+      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#deb887" },
+      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#f4a460" },
+      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#d2b48c" },
+      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#f5deb3" }
+    ];
+
+    return achievementLevels
+      .filter(level => enrolledCount < level.count)
+      .map((level, index) => ({
+        icon: level.icon,
+        title: level.title,
+        description: level.description,
+        hexColor: level.hexColor,
+        requiredCount: level.count,
+        progress: Math.min(enrolledCount / level.count, 1)
+      }));
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
@@ -1164,38 +1217,19 @@ const StudentDashboard = () => {
           </div>
         </section>
 
-        {/* Recent Achievements */}
+        {/* Achievements */}
         <section className="mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-              Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Achievements</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Achievements</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Celebrate your learning milestones and unlock new badges</p>
           </div>
 
           <div className="flex justify-center gap-6 flex-wrap">
-            {[
-              {
-                icon: Award,
-                title: "Course Master",
-                description: "Completed 10 courses",
-                unlockedAt: "2024-01-15"
-              },
-              {
-                icon: TrendingUp,
-                title: "Streak Champion",
-                description: "30-day learning streak",
-                unlockedAt: "2024-01-10"
-              },
-              {
-                icon: Star,
-                title: "Top Performer",
-                description: "95% average score",
-                unlockedAt: "2024-01-05"
-              }
-            ].map((achievement, index) => (
+            {generateDynamicAchievements(enrolledCourses.size).map((achievement, index) => (
               <ModernAchievementCard
-                key={index}
+                key={`${achievement.title}-${index}`}
                 achievement={achievement}
                 delay={index * 0.1}
               />
@@ -1203,14 +1237,32 @@ const StudentDashboard = () => {
           </div>
         </section>
 
-        {/* Request Course Section */}
-        <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 md:p-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">Can't find what you're looking for?</h2>
-            <p className="text-xl text-gray-700 mb-10 leading-relaxed">Request a new course and we'll add it to our collection. Your learning journey is our priority!</p>
-            <RequestCourseForm />
-          </div>
-        </section>
+        {/* To Be Unlocked Achievements */}
+        {generateUpcomingAchievements(enrolledCourses.size).length > 0 && (
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Upcoming Achievements</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">Continue your learning journey to unlock these prestigious milestones</p>
+            </div>
+
+            <div className="flex justify-center gap-6 flex-wrap">
+              {generateUpcomingAchievements(enrolledCourses.size).map((achievement, index) => (
+                <div key={`${achievement.title}-${index}`} className="opacity-60 grayscale">
+                  <ModernAchievementCard
+                    achievement={{
+                      ...achievement,
+                      title: achievement.title,
+                      description: `Unlock at ${achievement.requiredCount} courses enrolled`
+                    }}
+                    delay={index * 0.1}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

@@ -447,10 +447,10 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <GlassMorphismCard
-        width="200px"
-        height="200px"
-        primaryColor="#fbbf24"
-        secondaryColor="#f59e0b"
+        width="320px"
+        height="280px"
+        primaryColor="#d4af37"
+        secondaryColor="#ffd700"
         className="achievement-card"
       >
         <div className="achievement-content">
@@ -459,7 +459,9 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
             animate={isHovered ? { rotate: 360 } : { rotate: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="achievement-icon">
+            <div className="achievement-icon" style={{
+              background: achievement.hexColor ? `linear-gradient(135deg, ${achievement.hexColor}, ${achievement.hexColor}dd)` : 'linear-gradient(135deg, #fbbf24, #f59e0b)'
+            }}>
               <achievement.icon className="w-8 h-8" />
             </div>
           </motion.div>
@@ -467,7 +469,11 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
           <h3 className="achievement-title">{achievement.title}</h3>
           <p className="achievement-description">{achievement.description}</p>
 
-      
+          {achievement.enrolledCount && (
+            <div className="achievement-reason">
+              {achievement.enrolledCount} courses enrolled
+            </div>
+          )}
 
           {/* Sparkle Effects */}
           <AnimatePresence>
@@ -498,45 +504,75 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
           align-items: center;
           justify-content: center;
           height: 100%;
-          padding: 20px;
+          padding: 28px;
           text-align: center;
           position: relative;
         }
 
         .achievement-icon-container {
-          margin-bottom: 16px;
+          margin-bottom: 20px;
         }
 
         .achievement-icon {
           width: 56px;
           height: 56px;
-          background: linear-gradient(135deg, #fbbf24, #f59e0b);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+          box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+          transition: all 0.3s ease;
+          background: linear-gradient(135deg, #d4af37, #ffd700);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .achievement-icon::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(212, 175, 55, 0.3));
+          border-radius: 50%;
         }
 
         .achievement-title {
-          font-size: 1rem;
-          font-weight: 700;
-          color: #1f2937;
-          margin: 0 0 8px 0;
+          font-size: 1.2rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #1f2937, #4b5563);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin: 0 0 12px 0;
+          line-height: 1.2;
+          letter-spacing: -0.025em;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
 
         .achievement-description {
-          font-size: 0.875rem;
-          color: #6b7280;
-          line-height: 1.4;
-          margin: 0 0 12px 0;
+          font-size: 0.85rem;
+          color: #374151;
+          line-height: 1.6;
+          margin: 0 0 8px 0;
+          text-align: center;
+          font-weight: 400;
+          letter-spacing: 0.025em;
+          opacity: 0.9;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
 
-        .achievement-date {
+        .achievement-reason {
           font-size: 0.75rem;
-          color: #9ca3af;
+          color: #6b7280;
           font-weight: 500;
+          text-align: center;
+          margin-top: auto;
+          padding-top: 8px;
+          border-top: 1px solid rgba(107, 114, 128, 0.2);
         }
 
         .sparkles {
@@ -547,7 +583,7 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
 
         .sparkle {
           position: absolute;
-          color: #fbbf24;
+          color: #ffd700;
           animation: sparkle-float 2s ease-in-out infinite;
         }
 
