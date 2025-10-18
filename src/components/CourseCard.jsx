@@ -55,8 +55,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
       <CreatorInfoModal course={course} isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
       <div className="course-card-wrapper">
         <GlassMorphismCard
-          width="300px"
-          height="200px"
+          width="280px"
+          height="320px"
           primaryColor="#f59e0b"
           secondaryColor="#ef4444"
           className="course-glass-card"
@@ -66,8 +66,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
 
         <style jsx>{`
           .course-card-wrapper {
-            width: 300px;
-            height: 200px;
+            width: 280px;
+            height: 320px;
             margin: 0 auto;
           }
 
@@ -87,14 +87,28 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
           }
 
           .modern-title {
-            font-size: 1.4rem;
-            font-weight: 800;
+            font-size: 1.6rem;
+            font-weight: 900;
             color: transparent;
             -webkit-background-clip: text;
-            background-image: linear-gradient(135deg, #1f2937, #6b7280);
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.2;
             margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease-in-out infinite;
+          }
+
+          @keyframes gradient-shift {
+            0%, 100% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
           }
 
           .course-bottom-section {
