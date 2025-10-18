@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, TrendingUp, Users, Award } from 'lucide-react';
+import CustomSearchBar from './CustomSearchBar';
 
 const EnhancedHeroSection = ({ userName, searchTerm, onSearchChange }) => {
   const canvasRef = useRef(null);
@@ -173,196 +174,147 @@ const EnhancedHeroSection = ({ userName, searchTerm, onSearchChange }) => {
             </span>
           </motion.p>
 
-          {/* Enhanced search bar */}
+          {/* Modern Search Interface */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="relative max-w-2xl mx-auto mb-16 "
+            className="relative max-w-lg mx-auto mb-16"
           >
+            {/* Floating accent elements */}
+            <div className="absolute inset-0 -m-8 pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-3 h-3 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full"
+                  style={{
+                    left: `${15 + (i * 10)}%`,
+                    top: `${10 + (i % 3) * 25}%`,
+                  }}
+                  animate={{
+                    scale: [0, 1.2, 0],
+                    opacity: [0, 0.6, 0],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 4 + (i * 0.3),
+                    repeat: Infinity,
+                    delay: i * 0.4,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+
             <div className="relative group">
-              {/* Animated outer glow ring */}
-              <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 ease-out">
-                <div className="w-full h-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-2xl animate-pulse-glow"></div>
-              </div>
+              {/* Subtle glow ring */}
+              <motion.div
+                className="absolute -inset-2 rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500"
+                animate={{
+                  boxShadow: [
+                    "0 0 0px rgba(59, 130, 246, 0)",
+                    "0 0 30px rgba(139, 92, 246, 0.3)",
+                    "0 0 0px rgba(59, 130, 246, 0)"
+                  ]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
 
-              {/* Main search container with animated border */}
-              <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-3 border-2 border-transparent shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:border-purple-300/50">
+              {/* Glass morphism container */}
+              <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-white/30 shadow-xl group-hover:shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-500">
                 {/* Animated border gradient */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 opacity-0 group-hover:opacity-20 transition-all duration-500 ease-out animate-gradient-border"></div>
+                <motion.div
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 opacity-0 group-hover:opacity-40 transition-all duration-500"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
 
-                <div className="relative flex items-center gap-4">
-                  {/* Search icon with enhanced animations */}
+                {/* Custom Search Bar Integration */}
+                <div className="relative w-full flex justify-center">
+                  {/* Animating small shapes */}
                   <motion.div
-                    className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden"
-                    whileHover={{
-                      rotate: [0, -10, 10, 0],
-                      scale: [1, 1.1, 1.05, 1],
+                    className="absolute -top-3 -left-3 w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
+                    animate={{
+                      y: [0, -10, 0],
+                      opacity: [0.5, 1, 0.5],
                     }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <motion.div
-                      animate={{
-                        rotate: [0, 5, -5, 0],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      <Sparkles className="w-7 h-7 text-white" />
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Search input */}
-                  <motion.input
-                    type="text"
-                    value={searchTerm}
-                    onChange={onSearchChange}
-                    placeholder="Search courses, topics, or skills..."
-                    className="flex-1 bg-transparent border-0 outline-none text-lg text-gray-700 placeholder-gray-400 px-4 py-3 focus:ring-0 font-medium"
-                    whileFocus={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -bottom-3 left-2 w-4 h-2 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg rotate-45"
+                    animate={{
+                      rotate: [45, 90, 45],
+                      x: [0, 5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -bottom-2 -right-3 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-500 border border-purple-300/50"
+                    animate={{
+                      opacity: [0.4, 1, 0.4],
+                      scale: [0.8, 1.2, 0.8],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
                   />
 
-                  {/* Enhanced search button with advanced animations */}
-                  <motion.button
-                    className="relative px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white font-semibold rounded-xl overflow-hidden group/btn shadow-lg"
-                    whileHover={{
-                      scale: 1.05,
-                      rotate: [0, -2, 2, 0],
-                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.5)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    {/* Multiple animated background layers */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover/btn:opacity-10 transition-opacity duration-300"></div>
+                  <CustomSearchBar
+                    value={searchTerm}
+                    onChange={onSearchChange}
+                    placeholder="Search courses"
+                  />
+                </div>
 
-                    {/* Animated shine effect */}
+                {/* Floating accent dots */}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  {[...Array(3)].map((_, i) => (
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100"
+                      key={i}
+                      className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
                       animate={{
-                        x: ['-100%', '100%'],
+                        opacity: [0.3, 1, 0.3],
+                        scale: [0.8, 1.4, 0.8],
                       }}
                       transition={{
-                        duration: 1.5,
+                        duration: 2,
                         repeat: Infinity,
-                        repeatDelay: 2,
+                        delay: i * 0.3,
                         ease: "easeInOut"
                       }}
                     />
-
-                    {/* Button content */}
-                    <span className="relative flex items-center gap-3 text-base font-bold">
-                      <motion.span
-                        animate={{
-                          textShadow: [
-                            "0 0 0px rgba(255,255,255,0)",
-                            "0 0 10px rgba(255,255,255,0.5)",
-                            "0 0 0px rgba(255,255,255,0)"
-                          ]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        Search
-                      </motion.span>
-                      <motion.div
-                        animate={{
-                          x: [0, 4, 0],
-                          rotate: [0, 10, -10, 0]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        <Sparkles className="w-5 h-5" />
-                      </motion.div>
-                    </span>
-                  </motion.button>
+                  ))}
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Quick stats preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            {[
-              { icon: TrendingUp, label: "Learning Streak", value: "24 days", color: "from-green-500 to-emerald-500" },
-              { icon: Award, label: "Certificates", value: "12 earned", color: "from-yellow-500 to-orange-500" },
-              { icon: Users, label: "Study Groups", value: "3 active", color: "from-blue-500 to-indigo-500" },
-              { icon: Sparkles, label: "Achievements", value: "8 unlocked", color: "from-purple-500 to-pink-500" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5, scale: 1.05 }}
-                className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-3 mx-auto`}>
-                  <stat.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+          
         </motion.div>
       </div>
 
       <style jsx>{`
-        @keyframes gradient-x {
-          0%, 100% { background-size: 200% 200%; background-position: left center; }
-          50% { background-size: 200% 200%; background-position: right center; }
-        }
-
-        @keyframes gradient-border {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-
-        @keyframes pulse-glow {
-          0%, 100% {
-            opacity: 0.1;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.3;
-            transform: scale(1.05);
-          }
-        }
-
-        .animate-gradient-x {
-          animation: gradient-x 3s ease infinite;
-          background: linear-gradient(45deg, #8b5cf6, #3b82f6, #06b6d4, #8b5cf6);
-          background-size: 200% 200%;
-        }
-
-        .animate-gradient-border {
-          animation: gradient-border 3s ease infinite;
-          background: linear-gradient(45deg, #8b5cf6, #3b82f6, #06b6d4, #8b5cf6);
-          background-size: 200% 200%;
-        }
-
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
-        }
-
         .bg-grid-slate-100 {
           background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='m0 .5h32m-32 32v-32'/%3e%3c/svg%3e");
         }

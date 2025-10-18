@@ -1122,15 +1122,19 @@ const StudentDashboard = () => {
         <section className="mb-20">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-black text-gray-900 flex items-center gap-3 mb-2">
-                <span className="w-2 h-10 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></span>
-                Featured Courses
+              <h2 className="text-3xl md:text-4xl font-black flex items-center gap-3 mb-2">
+                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">Featured Courses</span>
               </h2>
               <p className="text-lg text-gray-600">Handpicked courses to accelerate your learning</p>
             </div>
-            <Link to="/courses" className="group flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold text-lg">
-              <span>Browse all courses</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Link
+              to="/courses"
+              className="group relative inline-flex items-center gap-2 px-8 py-4 font-bold text-lg text-white bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-600 via-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10">Browse all courses</span>
+              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
 
