@@ -20,7 +20,9 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
     <div className="course-content">
       {/* Title Section */}
       <div className="course-title-section">
-        <p className="modern-title">{course.name}</p>
+        <Link to={`/course/${course.id}`} className="block">
+          <p className="modern-title">{course.name}</p>
+        </Link>
       </div>
 
       {/* Bottom Section with Tags */}
@@ -76,7 +78,7 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             flex-direction: column;
             height: 100%;
             justify-content: space-between;
-            padding: 20px;
+            padding: 8px;
           }
 
           .course-title-section {
@@ -88,7 +90,7 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
 
           .modern-title {
             font-size: 1.6rem;
-            font-weight: 900;
+            font-weight: 800;
             color: transparent;
             -webkit-background-clip: text;
             background-image: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
@@ -99,7 +101,9 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             letter-spacing: 0.5px;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background-size: 200% 200%;
-            animation: gradient-shift 3s ease-in-out infinite;
+            animation: gradient-shift 8s ease-in-out infinite;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3));
           }
 
           @keyframes gradient-shift {
@@ -132,6 +136,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           }
 
           .course-duration-tag {
@@ -139,11 +145,13 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             align-items: center;
             gap: 4px;
             font-size: 0.75rem;
-            color: #6b7280;
-            background: rgba(255, 255, 255, 0.8);
+            color: #374151;
+            background: rgba(255, 255, 255, 0.9);
             padding: 4px 8px;
             border-radius: 10px;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
           }
 
           .course-status-badge {
@@ -156,6 +164,9 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             justify-content: center;
             gap: 4px;
             align-self: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
           }
 
           .course-status-badge.enrolled {

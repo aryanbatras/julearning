@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, GraduationCap, Shield, Upload } from 'lucide-react';
@@ -35,6 +35,7 @@ const SignupPage = () => {
     });
     const { signUp, loading } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const { toast } = useToast();
     const fileInputRef = useRef(null);
 
@@ -96,7 +97,13 @@ const SignupPage = () => {
             }
 
             if (user) {
-                navigate('/dashboard');
+                // Check if there's a redirect state from the course page
+                const from = location.state?.from;
+                if (from && from.startsWith('/course/')) {
+                    navigate(from);
+                } else {
+                    navigate(role === 'admin' ? '/admin' : '/dashboard');
+                }
             }
         }
     };

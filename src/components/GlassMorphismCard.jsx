@@ -48,7 +48,7 @@ const GlassMorphismCard = ({
           z-index: -1;
           border: 2px solid rgba(255, 255, 255, 0.65);
           box-shadow: inset 10px 0px 20px #fff;
-          animation: ani 28s ease-in-out infinite;
+          animation: ani 45s ease-in-out infinite;
         }
 
         .large-circle {
@@ -95,7 +95,7 @@ const GlassMorphismCard = ({
           background: conic-gradient(from 0deg, transparent, ${primaryColor}, ${secondaryColor}, transparent, ${primaryColor});
           border-radius: 12px;
           z-index: -1;
-          animation: border-shine 3s linear infinite;
+          animation: border-shine 20s ease-in-out infinite;
           filter: blur(40px);
           opacity: 0.45;
         }
@@ -110,6 +110,11 @@ const GlassMorphismCard = ({
           justify-content: center;
           align-items: center;
           text-align: center;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(16px);
+          border-radius: 2px;
+          padding: 2px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         @keyframes ani {
