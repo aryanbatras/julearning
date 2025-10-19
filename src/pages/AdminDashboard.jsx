@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { BookOpen, Tag, CreditCard, Users, GalleryHorizontal, UserCog } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CoursesTab from '@/components/admin/CoursesTab';
-import CouponsTab from '@/components/admin/CouponsTab';
 import PaymentsTab from '@/components/admin/PaymentsTab';
 import TeamTab from '@/components/admin/TeamTab';
 import GalleryTab from '@/components/admin/GalleryTab';
@@ -59,7 +58,6 @@ const AdminDashboard = () => {
             
             <TabsContent value="profile"><ProfileTab /></TabsContent>
             <TabsContent value="courses"><CoursesTab /></TabsContent>
-            <TabsContent value="coupons"><CouponsTab /></TabsContent>
             <TabsContent value="payments"><PaymentsTab /></TabsContent>
             <TabsContent value="team"><TeamTab /></TabsContent>
             <TabsContent value="gallery"><GalleryTab /></TabsContent>
