@@ -101,5 +101,4 @@ yarn-error.log*
 next-env.d.ts
 
 #credentials
-src/lib/supabase.js
 src/lib/customSupabaseClient.js
