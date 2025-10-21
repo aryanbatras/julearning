@@ -1298,6 +1298,27 @@ const fetchCoursesAndEnrollments = useCallback(async () => {
             </div>
           </section>
         )}
+
+        {/* Request for Courses Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+              Request for Courses
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Can't find the course you're looking for? Let us know and we'll consider adding it to our platform.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <RequestCourseForm />
+          </div>
+        </motion.section>
       </main>
     </div>
   );
