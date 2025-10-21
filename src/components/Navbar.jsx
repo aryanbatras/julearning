@@ -551,6 +551,8 @@ const Navbar = () => {
     const handleLogout = async () => {
         await signOut();
         navigate('/');
+        // Refresh the page to ensure complete logout
+        window.location.reload();
     };
 
     const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
