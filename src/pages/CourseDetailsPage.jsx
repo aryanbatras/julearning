@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart } from 'lucide-react';
+import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart, User, Instagram, Linkedin, Link as LinkIcon, School as University } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -18,6 +18,8 @@ const CourseDetailsPage = () => {
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [creator, setCreator] = useState(null);
+  const [courseCount, setCourseCount] = useState(0);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -33,6 +35,61 @@ const CourseDetailsPage = () => {
         return;
       }
       setCourse(courseData);
+
+      // Fetch creator information
+      if (courseData.creator_id) {
+        console.log('Course creator_id:', courseData.creator_id);
+        const { data: creatorData, error: creatorError } = await supabase
+          .from('admin_profiles')
+          .select(`
+            *,
+            profiles ( name )
+          `)
+          .eq('id', courseData.creator_id)
+          .single();
+
+        if (creatorError) {
+          console.error("Error fetching creator:", creatorError);
+          console.error("Creator ID that failed:", courseData.creator_id);
+
+          // If admin_profiles record doesn't exist, try to use course.profiles data
+          if (courseData.profiles) {
+            console.log("Using course.profiles as fallback:", courseData.profiles);
+            setCreator({
+              profiles: courseData.profiles,
+              bio: null,
+              college: null,
+              message_for_juniors: null,
+              social_links: {}
+            });
+          }
+        } else {
+          console.log("Creator data fetched successfully:", creatorData);
+          setCreator(creatorData);
+        }
+
+        // Fetch course count for this creator
+        const { count, error: courseCountError } = await supabase
+          .from('courses')
+          .select('*', { count: 'exact', head: true })
+          .eq('creator_id', courseData.creator_id);
+
+        if (courseCountError) {
+          console.error("Error fetching course count:", courseCountError);
+        } else {
+          setCourseCount(count || 0);
+        }
+      } else if (courseData.profiles) {
+        // Fallback to course.profiles if no creator_id
+        console.log("No creator_id, using course.profiles:", courseData.profiles);
+        setCreator({
+          profiles: courseData.profiles,
+          bio: null,
+          college: null,
+          message_for_juniors: null,
+          social_links: {}
+        });
+      }
 
       if (user) {
         const { data: enrollmentData, error: enrollmentError } = await supabase
@@ -511,6 +568,136 @@ const CourseDetailsPage = () => {
           </div>
 
         </div>
+
+        {/* Creator Information Section */}
+        {(creator || course.profiles) && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+                Meet Your Course Creator
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Learn from a senior who created this course to help juniors excel in their exams
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500"></div>
+                <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/30 shadow-2xl">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    {/* Creator Image */}
+                    <div className="flex-shrink-0">
+                      <div className="relative">
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-gradient-to-br from-indigo-100 to-purple-100 border-4 border-white/50 shadow-xl">
+                          {creator?.profile_image_url ? (
+                            <img
+                              src={creator.profile_image_url}
+                              alt={creator.profiles?.name || course.profiles?.name || 'Creator'}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-200 to-purple-200">
+                              <User className="w-16 h-16 text-indigo-600" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                          <Heart className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Creator Info */}
+                    <div className="flex-1 text-center md:text-left">
+                      <div className="mb-6">
+                        <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                          {creator?.profiles?.name || course.profiles?.name || 'Course Creator'}
+                        </h3>
+                        {creator?.college && (
+                          <div className="flex items-center justify-center md:justify-start gap-2 text-lg text-gray-600 mb-2">
+                            <University className="w-5 h-5 text-indigo-600" />
+                            <span>{creator.college}</span>
+                          </div>
+                        )}
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full">
+                          <Award className="w-4 h-4 text-indigo-600" />
+                          <span className="text-sm font-medium text-gray-700">
+                            {courseCount || 1} Course{(courseCount || 1) !== 1 ? 's' : ''} Created
+                          </span>
+                        </div>
+                      </div>
+
+                      {creator?.bio && (
+                        <div className="mb-6">
+                          <h4 className="text-lg font-semibold text-gray-800 mb-2">About</h4>
+                          <p className="text-gray-600 leading-relaxed">{creator.bio}</p>
+                        </div>
+                      )}
+
+                      {creator?.message_for_juniors && (
+                        <div className="mb-6">
+                          <div className="bg-gradient-to-r from-pink-50 to-purple-50 border-l-4 border-pink-400 p-4 rounded-r-lg">
+                            <p className="text-pink-700 italic">"{creator.message_for_juniors}"</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Social Links */}
+                      {(creator?.social_links?.instagram || creator?.social_links?.linkedin || creator?.social_links?.other) && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-800 mb-3">Connect</h4>
+                          <div className="flex justify-center md:justify-start gap-4">
+                            {creator.social_links?.instagram && (
+                              <a
+                                href={creator.social_links.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform duration-200 shadow-lg"
+                              >
+                                <Instagram className="w-5 h-5" />
+                              </a>
+                            )}
+                            {creator.social_links?.linkedin && (
+                              <a
+                                href={creator.social_links.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform duration-200 shadow-lg"
+                              >
+                                <Linkedin className="w-5 h-5" />
+                              </a>
+                            )}
+                            {creator.social_links?.other && (
+                              <a
+                                href={creator.social_links.other}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform duration-200 shadow-lg"
+                              >
+                                <LinkIcon className="w-5 h-5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </>
   );

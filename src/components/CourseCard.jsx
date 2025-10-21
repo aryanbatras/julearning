@@ -1,77 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, IndianRupee, CheckCircle, Download, Video, ArrowRight, Sparkles, Heart, Clock, BarChart2, Users, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import CreatorInfoModal from '@/components/CreatorInfoModal';
 import GlassMorphismCard from '@/components/GlassMorphismCard';
 
 const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton = false }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const stopPropagation = (e) => e.stopPropagation();
-
-  const handleCreatorClick = (e) => {
-    stopPropagation(e);
-    setIsModalOpen(true);
-  };
-
   const thumbnailUrl = course.thumbnail_url || 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
 
   const cardContent = (
-    <div className="course-content">
-      {/* Title Section */}
-      <div className="course-title-section">
-        <Link to={`/course/${course.id}`} className="course-title-link">
+    <Link to={`/course/${course.id}`} className="course-card-link">
+      <div className="course-content">
+        {/* Title Section */}
+        <div className="course-title-section">
           <div className="title-container">
             <h3 className="modern-title">{course.name}</h3>
           </div>
-        </Link>
-      </div>
-
-      {/* Bottom Section with Tags */}
-      <div className="course-bottom-section">
-        <div className="course-tags">
-          <span className="course-code-tag">{course.code}</span>
-          {course.duration && (
-            <span className="course-duration-tag">
-              <Clock className="w-3 h-3" />
-              {course.duration}
-            </span>
-          )}
         </div>
 
-        {/* Status Badge */}
-        <div className="course-status-wrapper">
-          {isEnrolled ? (
-            <div className="course-status-badge enrolled">
-              <CheckCircle className="w-3 h-3" />
-              <span>Enrolled</span>
-            </div>
-          ) : (
-            <div className={`course-status-badge ${course.is_free ? 'free' : 'paid'}`}>
-              {course.is_free ? 'FREE' : `₹${course.price || 'PAID'}`}
-            </div>
-          )}
-        </div>
-
-        {/* Made with Love Section */}
-        <div className="made-with-love-section">
-          <div className="made-with-love-line">
-            <Heart className="w-2.5 h-2.5 love-heart-icon" />
-            <span className="made-with-love-text">Made with love by</span>
+        {/* Bottom Section with Tags */}
+        <div className="course-bottom-section">
+          <div className="course-tags">
+            <span className="course-code-tag">{course.code}</span>
+            {course.duration && (
+              <span className="course-duration-tag">
+                <Clock className="w-3 h-3" />
+                {course.duration}
+              </span>
+            )}
           </div>
-          <div className="admin-name-line">
-            <span className="admin-name-text">{course.profiles?.name || 'Admin'}</span>
+
+          {/* Status Badge */}
+          <div className="course-status-wrapper">
+            {isEnrolled ? (
+              <div className="course-status-badge enrolled">
+                <CheckCircle className="w-3 h-3" />
+                <span>Enrolled</span>
+              </div>
+            ) : (
+              <div className={`course-status-badge ${course.is_free ? 'free' : 'paid'}`}>
+                {course.is_free ? 'FREE' : `₹${course.price || 'PAID'}`}
+              </div>
+            )}
+          </div>
+
+          {/* Made with Love Section */}
+          <div className="made-with-love-section">
+            <div className="made-with-love-line">
+              <Heart className="w-2.5 h-2.5 love-heart-icon" />
+              <span className="made-with-love-text">Made with love by</span>
+            </div>
+            <div className="admin-name-line">
+              <span className="admin-name-text">{course.profiles?.name || 'Course Creator'}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 
   return (
     <>
-      <CreatorInfoModal course={course} isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
       <div className="course-card-wrapper">
         <GlassMorphismCard
           width="280px"
@@ -144,9 +132,15 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             min-height: 120px;
           }
 
-          .course-title-link {
+          .course-card-link {
             text-decoration: none;
-            width: 100%;
+            color: inherit;
+            display: block;
+            height: 100%;
+          }
+
+          .course-card-link:hover {
+            transform: none !important;
           }
 
           .title-container {
