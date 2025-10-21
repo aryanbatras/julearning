@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart, User, Instagram, Link as LinkIcon, School as University, Share2, MessageCircle, Copy } from 'lucide-react';
+import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart, User, Instagram, Linkedin, Link as LinkIcon, School as University, Share2, MessageCircle, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
