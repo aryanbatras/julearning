@@ -153,7 +153,7 @@ const ModernProgressCard = ({ icon: Icon, title, current, total, percentage, col
         .progress-percentage {
           font-size: 1.5rem;
           font-weight: 800;
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+          background: linear-gradient(135deg, #3A8DFF, #1E3A8A);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -208,9 +208,9 @@ const ModernProgressCard = ({ icon: Icon, title, current, total, percentage, col
           position: absolute;
           width: 4px;
           height: 4px;
-          background: #3b82f6;
+          background: #3A8DFF;
           border-radius: 50%;
-          box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+          box-shadow: 0 0 6px rgba(58, 141, 255, 0.5);
         }
 
         .achievement-badge {
@@ -219,13 +219,13 @@ const ModernProgressCard = ({ icon: Icon, title, current, total, percentage, col
           right: 16px;
           width: 28px;
           height: 28px;
-          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          background: linear-gradient(135deg, #3A8DFF, #1E3A8A);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+          box-shadow: 0 4px 12px rgba(58, 141, 255, 0.3);
           animation: pulse 2s infinite;
         }
 
@@ -449,8 +449,8 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
       <GlassMorphismCard
         width="320px"
         height="280px"
-        primaryColor="#d4af37"
-        secondaryColor="#ffd700"
+        primaryColor="#3A8DFF"
+        secondaryColor="#1E3A8A"
         className="achievement-card"
       >
         <div className="achievement-content">
@@ -460,7 +460,7 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
             transition={{ duration: 0.8 }}
           >
             <div className="achievement-icon" style={{
-              background: achievement.hexColor ? `linear-gradient(135deg, ${achievement.hexColor}, ${achievement.hexColor}dd)` : 'linear-gradient(135deg, #fbbf24, #f59e0b)'
+              background: achievement.hexColor ? `linear-gradient(135deg, ${achievement.hexColor}, ${achievement.hexColor}dd)` : 'linear-gradient(135deg, #3A8DFF, #1E3A8A)'
             }}>
               <achievement.icon className="w-8 h-8" />
             </div>
@@ -521,9 +521,9 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
           align-items: center;
           justify-content: center;
           color: white;
-          box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+          box-shadow: 0 6px 20px rgba(58, 141, 255, 0.4);
           transition: all 0.3s ease;
-          background: linear-gradient(135deg, #d4af37, #ffd700);
+          background: linear-gradient(135deg, #3A8DFF, #1E3A8A);
           position: relative;
           overflow: hidden;
         }
@@ -535,7 +535,7 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(212, 175, 55, 0.3));
+          background: linear-gradient(135deg, rgba(58, 141, 255, 0.3), rgba(30, 58, 138, 0.3));
           border-radius: 50%;
         }
 
@@ -583,7 +583,7 @@ const ModernAchievementCard = ({ achievement, delay = 0 }) => {
 
         .sparkle {
           position: absolute;
-          color: #ffd700;
+          color: #3A8DFF;
           animation: sparkle-float 2s ease-in-out infinite;
         }
 

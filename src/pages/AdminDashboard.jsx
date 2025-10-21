@@ -40,9 +40,6 @@ const AdminDashboard = () => {
                   <TabsTrigger value="courses" className="data-[state=active]:bg-accent data-[state=active]:text-secondary rounded-lg py-2 px-3 sm:py-3 sm:px-4 text-sm sm:text-base font-medium transition-all flex-shrink-0 flex items-center gap-2">
                     <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Courses</span>
                   </TabsTrigger>
-                  <TabsTrigger value="coupons" className="data-[state=active]:bg-accent data-[state=active]:text-secondary rounded-lg py-2 px-3 sm:py-3 sm:px-4 text-sm sm:text-base font-medium transition-all flex-shrink-0 flex items-center gap-2">
-                    <Tag className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Coupons</span>
-                  </TabsTrigger>
                   <TabsTrigger value="payments" className="data-[state=active]:bg-accent data-[state=active]:text-secondary rounded-lg py-2 px-3 sm:py-3 sm:px-4 text-sm sm:text-base font-medium transition-all flex-shrink-0 flex items-center gap-2">
                     <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Payments</span>
                   </TabsTrigger>

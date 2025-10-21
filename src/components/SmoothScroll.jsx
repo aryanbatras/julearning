@@ -18,7 +18,7 @@ const SmoothScroll = ({ children }) => {
 
     // Create Lenis with tuned options for smooth, elegant scrolling
     const lenis = new Lenis({
-      duration: 6.2,                     // slower, graceful feeling
+      duration: 2.2,                     // slower, graceful feeling
       easing: (t) => 1 - Math.pow(1 - t, 4), // smooth quartic curve
       direction: 'vertical',
       gestureDirection: 'vertical',

@@ -58,9 +58,9 @@ body{
   left: 0;
   border-top: 2px solid #ececee;
   border-bottom: 2px solid #ececee;
-  transition: border-width 100ms 1500ms ease,
-              top 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
-              height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
+  transition: border-width 100ms 50ms ease,
+              top 100ms 75ms cubic-bezier(0.23, 1, 0.32, 1),
+              height 100ms 75ms cubic-bezier(0.23, 1, 0.32, 1),
               background-color 200ms ease,
               transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -77,8 +77,8 @@ body{
   right: 4px;
   background-color: #ececee;
   margin-top: -1px;
-  transition: width 100ms 1750ms ease,
-              right 100ms 1750ms ease,
+  transition: width 100ms 100ms ease,
+              right 100ms 100ms ease,
               margin-top 100ms ease,
               transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -89,11 +89,11 @@ body{
   height: 2px;
   background-color: #ececee;
   border-width: 0;
-  transition: border-width 100ms 340ms ease,
-              top 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
-              height 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
-              background-color 200ms 500ms ease,
-              transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: border-width 100ms 50ms ease,
+              top 100ms 50ms cubic-bezier(0.23, 1, 0.32, 1),
+              height 100ms 50ms cubic-bezier(0.23, 1, 0.32, 1),
+              background-color 200ms 100ms ease,
+              transform 200ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .menu-icon:checked + label:after{
@@ -103,8 +103,8 @@ body{
   transform: rotate(-45deg);
   transition: width 100ms ease,
               right 100ms ease,
-              margin-top 100ms 500ms ease,
-              transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
+              margin-top 100ms 100ms ease,
+              transform 200ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .nav{
@@ -120,11 +120,11 @@ body{
   overflow: hidden;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(147, 51, 234, 0.9) 100%);
   animation: border-transform 7s linear infinite;
-  transition: top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
-              right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 250ms 1100ms ease,
-              width 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1),
-              height 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: top 350ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              right 350ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 250ms 100ms ease,
+              width 650ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              height 650ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @keyframes border-transform{
@@ -144,11 +144,11 @@ body{
   transform: translate(50%, -50%);
   width: 200vw;
   height: 200vh;
-  transition: top 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
-              right 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 250ms 700ms ease,
-              width 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1),
-              height 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: top 350ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              right 350ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 250ms 100ms ease,
+              width 750ms 100ms cubic-bezier(0.23, 1, 0.32, 1),
+              height 750ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .nav ul{
@@ -212,9 +212,9 @@ body{
 
 .nav ul li a{
   font-family: 'Montserrat', sans-serif;
-  font-size: 7vh;
+  font-size: 8.5vh;
   text-transform: uppercase;
-  line-height: 4;
+  line-height: 4.5;
   font-weight: 800;
   display: inline-block;
   position: relative;
@@ -231,73 +231,100 @@ body{
 .nav ul li a:after{
   display: block;
   position: absolute;
-  top: 50%;
-  content: '';
-  height: 0.5vh;
-  margin-top: -0.25vh;
-  width: 0;
+  bottom: 30px;
   left: 0;
-  background-color: #353746;
-  opacity: 0.8;
-  transition: width 250ms linear;
+  content: '';
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+  transition: width 300ms ease;
+  border-radius: 2px;
 }
 
 .nav ul li:nth-child(1) a:hover:after{
   width: 100%;
   background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .nav ul li:nth-child(2) a:hover:after{
   width: 100%;
   background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .nav ul li:nth-child(3) a:hover:after{
   width: 100%;
   background: linear-gradient(90deg, #ec4899, #f59e0b);
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .nav ul li:nth-child(4) a:hover:after{
   width: 100%;
   background: linear-gradient(90deg, #f59e0b, #10b981);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 5px rgba(245, 158, 11, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+  }
 }
 
 .nav ul li:nth-child(5) a:hover:after{
   width: 100%;
   background: linear-gradient(90deg, #10b981, #3b82f6);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes bounce-scale {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
 }
 
 .menu-icon:checked ~ .nav ul li {
   pointer-events: auto;
   visibility: visible;
-  opacity: 0.75;
+  opacity: 0.25;
   transform: scale(1.45);
-  transition: opacity 2.5s ease,
-              transform 2s ease;
+  transition: opacity 0.2s ease,
+              transform 1.5s ease;
 }
 
 .menu-icon:checked ~ .nav ul li:nth-child(1){
-  transition-delay: 1400ms;
+  transition-delay: 50ms;
   opacity : 1;
 }
 
 .menu-icon:checked ~ .nav ul li:nth-child(2){
-  transition-delay: 1480ms;
+  transition-delay: 75ms;
   opacity : 1;
 }
 
 .menu-icon:checked ~ .nav ul li:nth-child(3){
-  transition-delay: 1560ms;
+  transition-delay: 100ms;
   opacity : 1;
 }
 
 .menu-icon:checked ~ .nav ul li:nth-child(4){
-  transition-delay: 1640ms;
+  transition-delay: 125ms;
   opacity : 1;
 }
 
 .menu-icon:checked ~ .nav ul li:nth-child(5){
-  transition-delay: 1720ms;
+  transition-delay: 150ms;
   opacity : 1;
 }
 

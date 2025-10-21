@@ -92,9 +92,67 @@ const MyCoursesPage = () => {
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-2">Your course list is empty</h3>
               <p className="text-gray-600 mb-6 max-w-md mx-auto">Start your learning journey by enrolling in courses from the dashboard.</p>
-              <Link to="/courses">
-                <Button>Explore Courses</Button>
-              </Link>
+              <div className="flex justify-center">
+                <div className="relative">
+                  {/* Animated background shapes for the button */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    {[...Array(4)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className={`absolute ${i % 2 === 0 ? 'w-6 h-6' : 'w-8 h-8'} ${
+                          i % 2 === 0 ? 'bg-gradient-to-br from-blue-400/25 to-purple-400/25' :
+                          'bg-gradient-to-br from-purple-400/25 to-indigo-400/25'
+                        } ${i % 2 === 0 ? 'rotate-45' : 'rounded-full'} backdrop-blur-sm`}
+                        style={{
+                          left: `${15 + i * 20}%`,
+                          top: `${25 + (i % 2) * 30}%`,
+                          zIndex: 0,
+                        }}
+                        animate={{
+                          y: [0, -6, 0],
+                          x: [0, 4, 0],
+                          rotate: i % 2 === 0 ? [45, 135, 45] : [0, 180, 0],
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{
+                          duration: 6 + i * 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative z-10"
+                  >
+                    <Link to="/courses">
+                      <Button
+                        className="relative overflow-hidden"
+                        style={{
+                          background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #8b5cf6 100%)',
+                          borderRadius: '12px',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          padding: '0.75rem 2rem',
+                          boxShadow: '0 6px 24px rgba(59, 130, 246, 0.3)',
+                          backdropFilter: 'blur(10px)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                        <span className="relative z-10 flex items-center gap-2">
+                          <BookOpen className="w-4 h-4" />
+                          Explore Courses
+                        </span>
+                      </Button>
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
           )}
         </div>

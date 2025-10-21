@@ -739,129 +739,68 @@ const StudentDashboard = () => {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.8, delay: 0.3}}
-              className="mb-16"
-            >
-              {/* Enhanced Stats Section */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-                <motion.div
-                  initial={{opacity: 0, y: 20}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{delay: 0.4, duration: 0.6}}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
-                    <motion.div
-                      className="text-4xl font-black text-blue-600 mb-3"
-                      animate={{scale: [1, 1.05, 1]}}
-                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut"}}
-                    >
-                      500+
-                    </motion.div>
-                    <div className="text-lg font-semibold text-gray-800 mb-2">Courses Available</div>
-                    <div className="text-gray-600">Comprehensive curriculum across all disciplines</div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{opacity: 0, y: 20}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{delay: 0.6, duration: 0.6}}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
-                    <motion.div
-                      className="text-4xl font-black text-purple-600 mb-3"
-                      animate={{scale: [1, 1.05, 1]}}
-                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5}}
-                    >
-                      10K+
-                    </motion.div>
-                    <div className="text-lg font-semibold text-gray-800 mb-2">Students Enrolled</div>
-                    <div className="text-gray-600">Active learners building their future</div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{opacity: 0, y: 20}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{delay: 0.8, duration: 0.6}}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
-                    <motion.div
-                      className="text-4xl font-black text-indigo-600 mb-3"
-                      animate={{scale: [1, 1.05, 1]}}
-                      transition={{duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1}}
-                    >
-                      95%
-                    </motion.div>
-                    <div className="text-lg font-semibold text-gray-800 mb-2">Success Rate</div>
-                    <div className="text-gray-600">Proven track record of student achievement</div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{opacity: 0, y: 20}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: 0.8, delay: 0.6}}
             >
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                {/* EXPLORE COURSES BUTTON - PRESERVED */}
-                <button
-                  className="button"
-                  data-text="Awesome"
+                {/* EXPLORE COURSES BUTTON - CLEAN & PROFESSIONAL */}
+                <motion.button
+                  className="relative explore-courses-btn-enhanced"
                   style={{
-                    margin: '0',
-                    height: 'auto',
-                    background: 'transparent',
-                    padding: '0',
+                    background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #8b5cf6 100%)',
                     border: 'none',
+                    borderRadius: '16px',
+                    color: 'white',
                     cursor: 'pointer',
-                    '--border-right': '6px',
-                    '--text-stroke-color': '#8957f7',
-                    '--animation-color': '#8957f7',
-                    '--fs-size': '1.9em',
-                    letterSpacing: '7px',
-                    textDecoration: 'none',
-                    fontSize: 'var(--fs-size)',
-                    fontFamily: 'Arial',
+                    fontSize: '1.2rem',
+                    fontWeight: '700',
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    letterSpacing: '0.5px',
+                    padding: '1rem 2.5rem',
                     position: 'relative',
                     textTransform: 'uppercase',
-                    color: 'transparent',
-                    WebkitTextStroke: '12.5px var(--text-stroke-color)',
-                    whiteSpace: 'nowrap',
-                    minWidth: 'fit-content'
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: '0 8px 32px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    minWidth: '220px',
+                    overflow: 'hidden',
                   }}
                   onClick={() => window.location.href = '/courses'}
+                  whileHover={{
+                    scale: 1.0,
+                    y: 0,
+                    boxShadow: '0 16px 50px rgba(59, 130, 246, 0.7), 0 0 30px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 >
-                  <span className="actual-text" style={{
-                    color: 'black',
-                    opacity: 0.1,
-                    WebkitTextStroke: '1px var(--text-stroke-color)',
-                    whiteSpace: 'nowrap'
-                  }}>&nbsp;Explore Courses&nbsp;</span>
-                  <span aria-hidden="true" className="hover-text" style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '0%',
-                    height: '100%',
-                    color: 'var(--animation-color)',
-                    borderRight: 'var(--border-right) solid var(--animation-color)',
-                    overflow: 'hidden',
-                    transition: '0.5s',
-                    WebkitTextStroke: '2px var(--animation-color)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    whiteSpace: 'nowrap'
-                  }}>&nbsp;Explore Courses&nbsp;</span>
-                </button>
+                  {/* Button inner glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+
+                  {/* Button content */}
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <BookOpen className="w-5 h-5" />
+                    Explore Courses
+                  </span>
+
+                  {/* Animated shine effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%)',
+                      backgroundSize: '200% 100%',
+                    }}
+                    animate={{
+                      backgroundPosition: ['-200% 0', '200% 0'],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </motion.button>
 
                 {/* LEARN MORE BUTTON - PRESERVED */}
                 <button
@@ -938,211 +877,111 @@ const StudentDashboard = () => {
           </div>
         </div>
 
-        {/* Enhanced Learning Resources Section */}
-        <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          {/* Floating background elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(12)].map((_, i) => (
+        {/* Enhanced Call to Action */}
+        <motion.section
+          initial={{opacity: 0, y: 20}}
+          whileInView={{opacity: 1, y: 0}}
+          transition={{duration: 0.8}}
+          viewport={{once: true}}
+          className="relative bg-gradient-to-r from-blue-50/80 via-purple-50/80 to-indigo-50/80 backdrop-blur-sm rounded-3xl p-12 md:p-16 text-center border border-white/20"
+        >
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden rounded-3xl">
+            {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
-                className={`absolute w-2 h-2 ${i % 3 === 0 ? 'bg-blue-400/30' : i % 3 === 1 ? 'bg-purple-400/30' : 'bg-indigo-400/30'} rounded-full`}
+                className={`absolute w-20 h-20 ${i % 2 === 0 ? 'bg-blue-400/10' : 'bg-purple-400/10'} rounded-full`}
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${20 + i * 15}%`,
+                  top: `${10 + (i % 3) * 20}%`,
                 }}
                 animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [0.8, 1.2, 0.8],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.6, 0.3],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 4,
+                  duration: 3 + i,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: Math.random() * 2,
                 }}
               />
             ))}
           </div>
 
-          <section className="mb-20 relative">
-            <motion.div
-              initial={{opacity: 0, y: 20}}
-              whileInView={{opacity: 1, y: 0}}
-              transition={{duration: 0.8}}
-              viewport={{once: true}}
-              className="text-center mb-16"
+          <div className="relative z-10">
+            <motion.h2
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 mb-6 leading-tight"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                textShadow: [
+                  "0 0 10px rgba(59, 130, 246, 0.3)",
+                  "0 0 20px rgba(147, 51, 234, 0.4)",
+                  "0 0 10px rgba(59, 130, 246, 0.3)"
+                ]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                backgroundSize: '200% 200%',
+                animation: 'gradientShift 4s ease-in-out infinite'
+              }}
             >
-              <h2 className="text-3xl md:text-4xl font-black flex items-center justify-center gap-3 mb-4">
-                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">Explore Learning Resources</span>
-                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Everything you need to succeed in your academic journey</p>
-            </motion.div>
+              Ready to Start Your Learning Journey?
+            </motion.h2>
+            <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
+              Join thousands of Jammu University students who are already learning with us. Sign up now and get started!
+            </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: BookOpen,
-                  title: "Academic Courses",
-                  description: "Comprehensive curriculum designed by expert faculty",
-                  gradient: "from-blue-500 to-blue-600",
-                  link: "/courses",
-                  delay: 0
-                },
-                {
-                  icon: Award,
-                  title: "Certifications",
-                  description: "Industry-recognized certificates to boost your resume",
-                  gradient: "from-purple-500 to-purple-600",
-                  link: "/certifications",
-                  delay: 0.1
-                },
-                {
-                  icon: Users,
-                  title: "Study Groups",
-                  description: "Collaborate with peers and learn together",
-                  gradient: "from-green-500 to-green-600",
-                  link: "/study-groups",
-                  delay: 0.2
-                }
-              ].map((resource, index) => (
-                <motion.div
-                  key={index}
-                  initial={{opacity: 0, y: 20}}
-                  whileInView={{opacity: 1, y: 0}}
-                  transition={{duration: 0.6, delay: resource.delay}}
-                  viewport={{once: true}}
-                  className="relative group"
+            {/* JOIN TODAY BUTTON */}
+            <div className="flex justify-center mx-auto w-full">
+              <button className="button" onClick={() => window.location.href = '/signup'}>
+                <div className="bg"></div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 342 208"
+                  height="280"
+                  width="450"
+                  className="splash"
                 >
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${resource.gradient} rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-tilt`}></div>
-                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300">
-                    <motion.div
-                      className={`w-16 h-16 bg-gradient-to-br ${resource.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                      whileHover={{scale: 1.1, rotate: 5}}
-                      transition={{type: "spring", stiffness: 400, damping: 10}}
-                    >
-                      <resource.icon className="w-8 h-8 text-white"/>
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{resource.title}</h3>
-                    <p className="text-gray-600 mb-6">{resource.description}</p>
-                    <Link
-                      to={resource.link}
-                      className={`inline-flex items-center font-semibold transition-colors text-lg`}
-                      style={{
-                        color: `var(--${resource.gradient.split('-')[1].replace('500', '600')})`,
-                      }}
-                    >
-                      Explore →
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </section>
-
-          {/* Enhanced Call to Action */}
-          <motion.section
-            initial={{opacity: 0, y: 20}}
-            whileInView={{opacity: 1, y: 0}}
-            transition={{duration: 0.8}}
-            viewport={{once: true}}
-            className="relative bg-gradient-to-r from-blue-50/80 via-purple-50/80 to-indigo-50/80 backdrop-blur-sm rounded-3xl p-12 md:p-16 text-center border border-white/20"
-          >
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden rounded-3xl">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute w-20 h-20 ${i % 2 === 0 ? 'bg-blue-400/10' : 'bg-purple-400/10'} rounded-full`}
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${10 + (i % 3) * 20}%`,
-                  }}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{
-                    duration: 3 + i,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              ))}
-            </div>
-
-            <div className="relative z-10">
-              <motion.h2
-                className="text-3xl md:text-4xl font-black text-gray-900 mb-6"
-                animate={{
-                  textShadow: [
-                    "0 0 0px rgba(59, 130, 246, 0)",
-                    "0 0 20px rgba(139, 92, 246, 0.3)",
-                    "0 0 0px rgba(59, 130, 246, 0)"
-                  ]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                Ready to Start Your Learning Journey?
-              </motion.h2>
-              <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
-                Join thousands of Jammu University students who are already learning with us. Sign up now and get started!
-              </p>
-
-              {/* JOIN TODAY BUTTON - PRESERVED */}
-              <div className="flex justify-center mx-auto w-full">
-                <button className="button" onClick={() => window.location.href = '/signup'}>
-                  <div className="bg"></div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 342 208"
-                    height="208"
-                    width="342"
-                    className="splash"
-                  >
-                    <path strokeLinecap="round" strokeWidth="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"></path>
-                    <path strokeLinecap="round" strokeWidth="3" d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"></path>
-                  </svg>
-                  <div className="wrap">
-                    <div className="outline"></div>
-                    <div className="content">
-                      <span className="char state-1">
-                        <span data-label="J" style={{'--i': 1}}>J</span>
-                        <span data-label="o" style={{'--i': 2}}>o</span>
-                        <span data-label="i" style={{'--i': 3}}>i</span>
-                        <span data-label="n" style={{'--i': 4}}>n</span>
-                        <span data-label="T" style={{'--i': 5}}>T</span>
-                        <span data-label="o" style={{'--i': 6}}>o</span>
-                        <span data-label="d" style={{'--i': 7}}>d</span>
-                        <span data-label="a" style={{'--i': 8}}>a</span>
-                        <span data-label="y" style={{'--i': 9}}>y</span>
-                      </span>
-                      <div className="icon">
-                        <div></div>
-                      </div>
-                      <span className="char state-2">
-                        <span data-label="J" style={{'--i': 1}}>J</span>
-                        <span data-label="o" style={{'--i': 2}}>o</span>
-                        <span data-label="i" style={{'--i': 3}}>i</span>
-                        <span data-label="n" style={{'--i': 4}}>n</span>
-                        <span data-label="N" style={{'--i': 5}}>N</span>
-                        <span data-label="o" style={{'--i': 6}}>o</span>
-                        <span data-label="w" style={{'--i': 7}}>w</span>
-                      </span>
+                  <path strokeLinecap="round" strokeWidth="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"></path>
+                  <path strokeLinecap="round" strokeWidth="3" d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893"></path>
+                </svg>
+                <div className="wrap">
+                  <div className="outline"></div>
+                  <div className="content">
+                    <span className="char state-1">
+                      <span data-label="J" style={{'--i': 1}}>J</span>
+                      <span data-label="o" style={{'--i': 2}}>o</span>
+                      <span data-label="i" style={{'--i': 3}}>i</span>
+                      <span data-label="n" style={{'--i': 4}}>n</span>
+                      <span data-label="T" style={{'--i': 5}}>T</span>
+                      <span data-label="o" style={{'--i': 6}}>o</span>
+                      <span data-label="d" style={{'--i': 7}}>d</span>
+                      <span data-label="a" style={{'--i': 8}}>a</span>
+                      <span data-label="y" style={{'--i': 9}}>y</span>
+                    </span>
+                    <div className="icon">
+                      <div></div>
                     </div>
+                    <span className="char state-2">
+                      <span data-label="J" style={{'--i': 1}}>J</span>
+                      <span data-label="o" style={{'--i': 2}}>o</span>
+                      <span data-label="i" style={{'--i': 3}}>i</span>
+                      <span data-label="n" style={{'--i': 4}}>n</span>
+                      <span data-label="N" style={{'--i': 5}}>N</span>
+                      <span data-label="o" style={{'--i': 6}}>o</span>
+                      <span data-label="w" style={{'--i': 7}}>w</span>
+                    </span>
                   </div>
-                </button>
-              </div>
+                </div>
+              </button>
             </div>
-          </motion.section>
-        </main>
+          </div>
+        </motion.section>
 
         <style jsx>{`
           .animate-tilt {
@@ -1160,19 +999,45 @@ const StudentDashboard = () => {
               transform: rotate(-3deg);
             }
           }
+
+          @keyframes glow {
+            0% {
+              text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+            }
+            100% {
+              text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+            }
+          }
+
+          @keyframes gradientShift {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+
+          .explore-courses-btn:active {
+            transform: translateY(0) scale(0.98) !important;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4) !important;
+          }
         `}</style>
       </div>
     );
-  }
+}
 
-  // Rest of the authenticated dashboard code...
-  const fetchCoursesAndEnrollments = useCallback(async () => {
-    setLoading(true);
+// Rest of the authenticated dashboard code...
+const fetchCoursesAndEnrollments = useCallback(async () => {
+  setLoading(true);
 
-    let query = supabase
-      .from('courses')
-      .select('*, profiles(name)')
-      .order('created_at', { ascending: false });
+  let query = supabase
+    .from('courses')
+    .select('*, profiles(name)')
+    .order('created_at', { ascending: false });
 
     if (searchTerm) {
       query = query.or(`name.ilike.%${searchTerm}%,code.ilike.%${searchTerm}%`);
@@ -1237,16 +1102,16 @@ const StudentDashboard = () => {
 
   const generateDynamicAchievements = useCallback((enrolledCount) => {
     const achievementLevels = [
-      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#d4af37" },
-      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#ffd700" },
-      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#ffed4e" },
-      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#daa520" },
-      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#b8860b" },
-      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#cd853f" },
-      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#deb887" },
-      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#f4a460" },
-      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#d2b48c" },
-      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#f5deb3" }
+      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#3A8DFF" },
+      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#1E3A8A" },
+      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#6366f1" },
+      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#8b5cf6" },
+      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#06b6d4" },
+      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#0891b2" },
+      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#0e7490" },
+      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#155e75" },
+      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#164e63" },
+      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#134e4a" }
     ];
 
     return achievementLevels
@@ -1264,16 +1129,16 @@ const StudentDashboard = () => {
 
   const generateUpcomingAchievements = useCallback((enrolledCount) => {
     const achievementLevels = [
-      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#d4af37" },
-      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#ffd700" },
-      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#ffed4e" },
-      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#daa520" },
-      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#b8860b" },
-      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#cd853f" },
-      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#deb887" },
-      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#f4a460" },
-      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#d2b48c" },
-      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#f5deb3" }
+      { count: 1, icon: BookOpen, title: "Foundation Builder", description: "Embarked on your educational journey with purpose and determination", hexColor: "#3A8DFF" },
+      { count: 2, icon: Award, title: "Dual Pathway Explorer", description: "Demonstrating commitment to multifaceted learning and growth", hexColor: "#1E3A8A" },
+      { count: 5, icon: TrendingUp, title: "Momentum Creator", description: "Building consistent learning habits that drive long-term success", hexColor: "#6366f1" },
+      { count: 10, icon: Star, title: "Course Mastery Achiever", description: "Excelling in comprehensive academic challenges and coursework", hexColor: "#8b5cf6" },
+      { count: 20, icon: Rocket, title: "Knowledge Accelerator", description: "Rapidly advancing through complex subjects with expert precision", hexColor: "#06b6d4" },
+      { count: 50, icon: BarChart2, title: "Academic Excellence Leader", description: "Setting new standards in educational achievement and dedication", hexColor: "#0891b2" },
+      { count: 100, icon: Award, title: "Scholarly Excellence Award", description: "Achieving the highest levels of academic distinction and mastery", hexColor: "#0e7490" },
+      { count: 200, icon: Star, title: "Distinguished Scholar", description: "Earning recognition as an elite academic performer and innovator", hexColor: "#155e75" },
+      { count: 500, icon: Rocket, title: "Wisdom Architect", description: "Constructing a foundation of profound knowledge and expertise", hexColor: "#164e63" },
+      { count: 1000, icon: Award, title: "Ultimate Academic Authority", description: "Reaching the pinnacle of educational achievement and influence", hexColor: "#134e4a" }
     ];
 
     return achievementLevels
@@ -1310,16 +1175,16 @@ const StudentDashboard = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-black flex items-center gap-3 mb-2">
-                <span className="w-2 h-10 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-full"></span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">Featured Courses</span>
+                <span className="w-2 h-10 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full"></span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600">Featured Courses</span>
               </h2>
               <p className="text-lg text-gray-600">Handpicked courses to accelerate your learning</p>
             </div>
             <Link
               to="/courses"
-              className="group relative inline-flex items-center gap-2 px-8 py-4 font-bold text-lg text-white bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden"
+              className="group relative inline-flex items-center gap-2 px-8 py-4 font-bold text-lg text-white bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-600 via-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">Browse all courses</span>
               <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
@@ -1366,8 +1231,8 @@ const StudentDashboard = () => {
         >
           <div className="text-center mb-16">
             <h2 className="text-2xl md:text-2xl font-black text-gray-900 mb-4">
-               <span className='text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500'>Your Learning </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r to-yellow-500 from-orange-500">Progress</span>
+               <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600'>Your Learning </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r to-indigo-600 from-blue-500">Progress</span>
             </h2>
             <p className="text-xl text-gray-500 max-w-xl mx-auto">Track your enrollment progress and discover new learning opportunities</p>
           </div>
@@ -1391,7 +1256,7 @@ const StudentDashboard = () => {
         <section className="mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Achievements</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">Achievements</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Celebrate your learning milestones and unlock new badges</p>
           </div>
