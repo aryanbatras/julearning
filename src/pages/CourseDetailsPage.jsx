@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart, User, Instagram, Linkedin, Link as LinkIcon, School as University } from 'lucide-react';
+import { Download, Video, FileText, ShoppingCart, Check, Clock, BookOpen, Users, Star, Award, Zap, Heart, User, Instagram, Link as LinkIcon, School as University, Share2, MessageCircle, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -20,6 +20,7 @@ const CourseDetailsPage = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [creator, setCreator] = useState(null);
   const [courseCount, setCourseCount] = useState(0);
+  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -114,6 +115,55 @@ const CourseDetailsPage = () => {
 
     fetchCourseAndEnrollment();
   }, [id, user]);
+
+  const shareUrl = `${window.location.origin}/course/${id}`;
+  const shareTitle = `Check out ${course?.name} on JU Learning Portal!`;
+  const shareDescription = `Learn ${course?.name} with premium quality content, video lectures, and comprehensive study materials.`;
+
+  const handleWhatsAppShare = () => {
+    const whatsappMessage = `Hey! Check out this amazing course "${course?.name}" on JU Learning Portal!
+
+JU Learning is a platform where we empower Jammu University students with world-class education, skill development, and career growth opportunities through our comprehensive learning ecosystem. This course includes premium video lectures, comprehensive notes, and previous year questions!
+
+${shareUrl}
+
+Start learning today and ace your exams!`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleFacebookShare = () => {
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    window.open(facebookUrl, '_blank');
+  };
+
+  const handleTwitterShare = () => {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
+    window.open(twitterUrl, '_blank');
+  };
+
+  const handleLinkedInShare = () => {
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+    window.open(linkedinUrl, '_blank');
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      toast({
+        title: "Link Copied! 📋",
+        description: "Share link copied to clipboard",
+      });
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      toast({
+        title: "Copy Failed",
+        description: "Unable to copy link to clipboard",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleApplyCoupon = async () => {
     const { data, error } = await supabase
@@ -417,6 +467,55 @@ const CourseDetailsPage = () => {
                       </>
                     )}
                   </div>
+
+                  {/* Student-Friendly Sharing Section */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.4 }}
+                    className="text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-6 border border-blue-100"
+                  >
+                    <div className="mb-4">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <Share2 className="w-6 h-6 text-blue-600" />
+                        <h3 className="text-xl font-bold text-gray-800">
+                          Help Your Friends! 🎓
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {/* WhatsApp Share */}
+                      <motion.button
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleWhatsAppShare}
+                        className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span className="text-sm">WhatsApp</span>
+                      </motion.button>
+
+                      {/* Copy Link */}
+                      <motion.button
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleCopyLink}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 ${
+                          copied
+                            ? 'bg-green-500 hover:bg-green-600 text-white'
+                            : 'bg-gray-600 hover:bg-gray-700 text-white'
+                        }`}
+                      >
+                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        <span className="text-sm">{copied ? 'Copied!' : 'Copy Link'}</span>
+                      </motion.button>
+                    </div>
+
+                    <p className="text-xs text-gray-500 mt-3">
+                      Sharing helps more students discover great courses! 🌟
+                    </p>
+                  </motion.div>
                 </motion.div>
               </motion.div>
             </div>
