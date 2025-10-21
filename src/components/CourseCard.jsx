@@ -62,8 +62,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
     <>
       <div className="course-card-wrapper">
         <GlassMorphismCard
-          width="280px"
-          height="320px"
+          width="260px"
+          height="330px"
           primaryColor="#3b82f6"
           secondaryColor="#56bdf6"
           className="course-glass-card"
@@ -107,10 +107,20 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
 
         <style jsx>{`
           .course-card-wrapper {
-            width: 280px;
+            width: 100%;
+            max-width: 280px;
             height: 320px;
             margin: 0 auto;
             position: relative;
+            box-sizing: border-box;
+          }
+
+          @media (max-width: 640px) {
+            .course-card-wrapper {
+              max-width: 100%;
+              height: auto;
+              min-height: 280px;
+            }
           }
 
           .course-content {
@@ -118,10 +128,19 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             flex-direction: column;
             height: 100%;
             justify-content: space-between;
-            padding: 12px;
+            padding: 16px;
             position: relative;
             z-index: 2;
             gap: 16px;
+            box-sizing: border-box;
+            width: 100%;
+          }
+
+          @media (max-width: 640px) {
+            .course-content {
+              padding: 18px;
+              gap: 14px;
+            }
           }
 
           .course-title-section {
@@ -150,12 +169,21 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             border-radius: 16px;
             padding: 32px 20px;
             overflow: hidden;
-            opacity: 0.65;
+            opacity: 0.7;
             box-shadow:
               0 8px 24px rgba(0, 0, 0, 0.06),
               0 4px 12px rgba(0, 0, 0, 0.04),
               inset 0 1px 0 rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(229, 231, 235, 0.8);
+            box-sizing: border-box;
+          }
+
+          @media (max-width: 640px) {
+            .title-container {
+              padding: 20px 10px;
+              border-radius: 10px;
+              opacity: 0.82;
+            }
           }
 
           .title-container::before {
@@ -185,15 +213,24 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
             color: #1f2937;
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.3;
             margin: 0;
             letter-spacing: 0.01em;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
             position: relative;
             z-index: 3;
             text-transform: uppercase;
-            word-break: break-word;
+            word-break: keep-all;
             white-space: pre-wrap;
+            max-width: 100%;
+            hyphens: auto;
+          }
+
+          @media (max-width: 640px) {
+            .modern-title {
+              font-size: 1rem;
+              line-height: 1.2;
+            }
           }
 
           @keyframes simpleShine {
@@ -209,7 +246,16 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
           .course-bottom-section {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+          }
+
+          @media (max-width: 640px) {
+            .course-bottom-section {
+              gap: 8px;
+            }
           }
 
           .course-tags {
@@ -218,6 +264,8 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
           }
 
           .course-code-tag {
@@ -229,6 +277,11 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             font-weight: 600;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 0;
           }
 
           .course-duration-tag {
@@ -259,6 +312,16 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(8px);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            min-width: fit-content;
+            flex-shrink: 0;
+          }
+
+          @media (max-width: 640px) {
+            .course-status-badge {
+              padding: 5px 10px;
+              font-size: 0.7rem;
+            }
           }
 
           .course-status-badge.enrolled {
@@ -276,18 +339,28 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: -2px;
+            gap: 2px;
             margin-top: 8px;
-            padding: 2px 10px;
+            padding: 4px 10px;
             background: rgba(59, 130, 246, 0.08);
             border-radius: 12px;
             border: 1px solid rgba(59, 130, 246, 0.15);
             backdrop-filter: blur(8px);
+            width: fit-content;
+            align-self: center;
+            box-sizing: border-box;
           }
 
           .made-with-love-section:hover {
             background: rgba(59, 130, 246, 0.12);
             border-color: rgba(59, 130, 246, 0.2);
+          }
+
+          @media (max-width: 640px) {
+            .made-with-love-section {
+              margin-top: 6px;
+              padding: 3px 8px;
+            }
           }
 
           .made-with-love-line {
@@ -298,6 +371,12 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
 
           .love-heart-icon {
             color: #3b82f6;
+            animation: gentle-pulse 3s ease-in-out infinite;
+          }
+
+          @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
           }
 
           .made-with-love-text {
@@ -318,6 +397,11 @@ const CourseCard = ({ course, index, onEnroll, isEnrolled, showCreatorInfoButton
             color: #1e40af;
             font-family: 'Inter', sans-serif;
             letter-spacing: 0.025em;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
           }
 
           /* Coin-flip thumbnail animation */

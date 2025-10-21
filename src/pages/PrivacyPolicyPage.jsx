@@ -133,7 +133,7 @@ const PrivacyPolicyPage = () => {
                     <h2 className="text-2xl font-bold text-gray-900">7. Your Rights and Choices</h2>
                   </div>
                   <p className="text-gray-700 leading-relaxed">
-                    You have the right to access, update, or delete your personal information. You can also opt out of non-essential communications. To exercise these rights, contact us at privacy@julearning.com. We'll respond promptly and assist you as per applicable laws.
+                    You have the right to access, update, or delete your personal information. You can also opt out of non-essential communications. To exercise these rights, contact us at julearning.com@gmail.com. We'll respond promptly and assist you as per applicable laws.
                   </p>
                 </motion.div>
                 <motion.div

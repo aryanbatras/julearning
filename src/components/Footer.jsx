@@ -304,7 +304,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email Us</p>
-                    <span className="font-medium">info@julearning.ac.in</span>
+                    <span className="font-medium">julearning.com@gmail.com</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-blue-50 group">
@@ -322,7 +322,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Visit Us</p>
-                    <span className="font-medium">Jammu University, J&K</span>
+                    <span className="font-medium">CSE Dept, MBSCET, Jammu</span>
                   </div>
                 </div>
               </div>
