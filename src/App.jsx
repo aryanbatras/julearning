@@ -13,6 +13,8 @@ import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import ContactPage from '@/pages/ContactPage';
 import TeamPage from '@/pages/TeamPage';
 import GalleryPage from '@/pages/GalleryPage';
+import BlogsPage from '@/pages/BlogsPage';
+import BlogPost from '@/pages/BlogPost';
 import { AuthProvider, useAuth } from '@/contexts/SupabaseAuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -140,6 +142,8 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/course/:id" element={<CourseDetailsPage />} />
             <Route path="/courses" element={<CoursesPage />} />
           </Route>

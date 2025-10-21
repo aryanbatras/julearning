@@ -439,14 +439,13 @@ const CourseDetailsPage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="space-y-12 mb-16">
             {/* Video Section */}
             {course.youtube_url && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="lg:col-span-2"
               >
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500"></div>
@@ -497,7 +496,7 @@ const CourseDetailsPage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               {/* Notes PDF */}
               {course.notes_pdf && (
@@ -505,27 +504,43 @@ const CourseDetailsPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 backdrop-blur-xl rounded-2xl border border-white/30 shadow-xl transform -rotate-1 group-hover:rotate-0 transition-transform duration-300"></div>
                   <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/30 shadow-xl">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
-                          <FileText className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-gray-800">Course Notes</h4>
-                          <p className="text-sm text-gray-600">PDF Document</p>
-                        </div>
-                      </div>
                       {isEnrolled ? (
-                        <Button
-                          onClick={() => window.open(course.notes_pdf, '_blank')}
-                          className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white"
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
-                      ) : (
-                        <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                          <Download className="w-5 h-5 text-gray-400" />
+                        <div className="w-screen h-screen flex flex-col">
+                          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-4 text-white flex items-center gap-4">
+                            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                              <FileText className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <h4 className="text-2xl font-bold">Course Notes</h4>
+                              <p className="text-sm opacity-90">PDF Document - Full Screen View</p>
+                            </div>
+                          </div>
+                          <iframe
+                            src={`https://drive.google.com/file/d/${course.notes_pdf.match(/\/d\/(.+?)\//)?.[1]}/preview`}
+                            className="flex-1 w-full border-0"
+                            allow="autoplay"
+                            title="Course Notes PDF"
+                          />
                         </div>
+                      ) : (
+                        <>
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Course Notes</h4>
+                              <p className="text-sm text-gray-600">PDF Document</p>
+                            </div>
+                          </div>
+                          <Button
+                            disabled={!isEnrolled}
+                            className={`bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white ${!isEnrolled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            {isEnrolled ? 'Download' : 'Enroll to Download'}
+                          </Button>
+                        </>
                       )}
                     </div>
                   </div>
@@ -538,27 +553,43 @@ const CourseDetailsPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-xl rounded-2xl border border-white/30 shadow-xl transform rotate-1 group-hover:rotate-0 transition-transform duration-300"></div>
                   <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/30 shadow-xl">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-                          <FileText className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-gray-800">Previous Year Questions</h4>
-                          <p className="text-sm text-gray-600">PDF Document</p>
-                        </div>
-                      </div>
                       {isEnrolled ? (
-                        <Button
-                          onClick={() => window.open(course.pyq_pdf, '_blank')}
-                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
-                      ) : (
-                        <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                          <Download className="w-5 h-5 text-gray-400" />
+                        <div className="w-screen h-screen flex flex-col">
+                          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 text-white flex items-center gap-4">
+                            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                              <FileText className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <h4 className="text-2xl font-bold">Previous Year Questions</h4>
+                              <p className="text-sm opacity-90">PDF Document - Full Screen View</p>
+                            </div>
+                          </div>
+                          <iframe
+                            src={`https://drive.google.com/file/d/${course.pyq_pdf.match(/\/d\/(.+?)\//)?.[1]}/preview`}
+                            className="flex-1 w-full border-0"
+                            allow="autoplay"
+                            title="PYQ PDF"
+                          />
                         </div>
+                      ) : (
+                        <>
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Previous Year Questions</h4>
+                              <p className="text-sm text-gray-600">PDF Document</p>
+                            </div>
+                          </div>
+                          <Button
+                            disabled={!isEnrolled}
+                            className={`bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white ${!isEnrolled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            {isEnrolled ? 'Download' : 'Enroll to Download'}
+                          </Button>
+                        </>
                       )}
                     </div>
                   </div>

@@ -16,6 +16,7 @@ const Footer = () => {
     { name: 'Contact', path: '/contact' },
     { name: 'Team', path: '/team' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Blogs', path: '/blogs' },
     { name: 'Privacy Policy', path: '/privacy-policy' },
   ];
 

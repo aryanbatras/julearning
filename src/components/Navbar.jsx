@@ -199,7 +199,7 @@ body{
 }
 
 .nav ul li:nth-child(3){
-  transition-delay: 100ms;
+  transition-delay: 500ms;
 }
 
 .nav ul li:nth-child(4){
@@ -210,11 +210,15 @@ body{
   transition-delay: 0ms;
 }
 
+.nav ul li:nth-child(6){
+  transition-delay: -50ms;
+}
+
 .nav ul li a{
   font-family: 'Montserrat', sans-serif;
   font-size: 8.5vh;
   text-transform: uppercase;
-  line-height: 4.5;
+  line-height: 3;
   font-weight: 800;
   display: inline-block;
   position: relative;
@@ -282,6 +286,12 @@ body{
   animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
+.nav ul li:nth-child(6) a:hover:after{
+  width: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
 @keyframes bounce-scale {
   0% {
     transform: scaleX(0);
@@ -297,9 +307,9 @@ body{
 .menu-icon:checked ~ .nav ul li {
   pointer-events: auto;
   visibility: visible;
-  opacity: 0.25;
+  opacity: 0;
   transform: scale(1.45);
-  transition: opacity 0.2s ease,
+  transition: opacity 1s ease,
               transform 1.5s ease;
 }
 
@@ -325,6 +335,11 @@ body{
 
 .menu-icon:checked ~ .nav ul li:nth-child(5){
   transition-delay: 150ms;
+  opacity : 1;
+}
+
+.menu-icon:checked ~ .nav ul li:nth-child(6){
+  transition-delay: 175ms;
   opacity : 1;
 }
 
@@ -566,6 +581,7 @@ const Navbar = () => {
                         <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
                         <li><a href="/my-courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
                         <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                        <li><a href="/blogs" onClick={() => setIsMobileMenuOpen(false)}>Blogs</a></li>
                         <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
                     </>
                 );
@@ -576,6 +592,7 @@ const Navbar = () => {
                         <li><a href="/admin/courses" onClick={() => setIsMobileMenuOpen(false)}>Courses</a></li>
                         <li><a href="/admin/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
                         <li><a href="/admin/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                        <li><a href="/blogs" onClick={() => setIsMobileMenuOpen(false)}>Blogs</a></li>
                     </>
                 );
             }
@@ -588,6 +605,7 @@ const Navbar = () => {
                 <li><a href="/courses" onClick={() => setIsMobileMenuOpen(false)}>Search</a></li>
                 <li><a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a></li>
                 <li><a href="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a></li>
+                <li><a href="/blogs" onClick={() => setIsMobileMenuOpen(false)}>Blogs</a></li>
                 <li><a href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</a></li>
             </>
         );
@@ -613,6 +631,7 @@ const Navbar = () => {
                                         <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
                                         <NavItem to="/my-courses" icon={<Library className="w-4 h-4" />}>Courses</NavItem>
                                         <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                        <NavItem to="/blogs" icon={<BookOpen className="w-4 h-4" />}>Blogs</NavItem>
                                         <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
                                     </>
                                 ) : (
@@ -622,6 +641,7 @@ const Navbar = () => {
                                         <NavItem to="/admin/courses" icon={<BookOpen className="w-4 h-4" />}>Courses</NavItem>
                                         <NavItem to="/admin/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
                                         <NavItem to="/admin/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                        <NavItem to="/blogs" icon={<BookOpen className="w-4 h-4" />}>Blogs</NavItem>
                                     </>
                                 )}
                             </div>
@@ -632,6 +652,7 @@ const Navbar = () => {
                                 <NavItem to="/courses" icon={<BookOpen className="w-4 h-4" />}>Search</NavItem>
                                 <NavItem to="/about" icon={<Users className="w-4 h-4" />}>About</NavItem>
                                 <NavItem to="/gallery" icon={<GalleryHorizontal className="w-4 h-4" />}>Gallery</NavItem>
+                                <NavItem to="/blogs" icon={<BookOpen className="w-4 h-4" />}>Blogs</NavItem>
                                 <NavItem to="/team" icon={<Users className="w-4 h-4" />}>Team</NavItem>
                             </div>
                         )}

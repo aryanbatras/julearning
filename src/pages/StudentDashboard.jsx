@@ -1194,14 +1194,14 @@ const fetchCoursesAndEnrollments = useCallback(async () => {
             {loading ? (
               <div className="flex justify-center items-center py-16">
                 <div className="animate-pulse flex space-x-4">
-                  {[1, 2, 3].map((i) => (
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
                     <div key={i} className="w-80 h-64 bg-gray-100 rounded-xl"></div>
                   ))}
                 </div>
               </div>
             ) : courses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {courses.slice(0, 3).map((course, index) => (
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                {courses.slice(0, 6).map((course, index) => (
                   <CourseCard
                     key={course.id}
                     course={course}

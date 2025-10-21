@@ -76,7 +76,7 @@ const MyCoursesPage = () => {
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-primary"></div>
              </div>
           ) : enrolledCourses.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {enrolledCourses.map((course, index) => (
                 <CourseCard key={course.id} course={course} index={index} isEnrolled={true} onEnroll={handleEnroll} showCreatorInfoButton={true} />
               ))}
